@@ -1,0 +1,440 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Winada — Multizone Audio Engine",
+  description = "A sleek, low-latency multi-zone audio controller and streaming server engine."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <!-- Interactive Canvas Vertex Network Background -->
+    <canvas id="vertex-canvas" class="vertex-canvas-bg"></canvas>
+
+    <!-- Cheerful ambient light field background -->
+    <div class="merry-ambient-bg">
+      <div class="glow-field field-coral"></div>
+      <div class="glow-field field-gold"></div>
+      <div class="glow-field field-teal"></div>
+    </div>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  /* ===== Cheerful, Premium Design System ===== */
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    /* Bright, warm, inviting cream base */
+    --color-bg: #fffdf9;
+    --color-bg-alt: #fbf9f2;
+    
+    /* Clean dark text */
+    --color-text: #1a1b1d;
+    --color-text-muted: #52565c;
+    --color-text-darker: #9ca0a6;
+    
+    /* Merrier, warm color signature gradients */
+    --color-brand: #ff5e36; /* Bright coral-vermillion */
+    --color-brand-glow: rgba(255, 94, 54, 0.16);
+    
+    /* Cheerful zone nodes */
+    --color-zone-1: #ff5e36; /* Coral Orange-Red */
+    --color-zone-2: #0ea5e9; /* Sky Blue */
+    --color-zone-3: #10b981; /* Fresh Green */
+    --color-zone-4: #f59e0b; /* Sunny Yellow */
+    --color-zone-5: #ec4899; /* Playful Pink */
+
+    --color-border: rgba(255, 94, 54, 0.06);
+    --color-border-strong: rgba(255, 94, 54, 0.12);
+
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+
+    --container-width: 1040px;
+    --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Interactive Canvas Background styling */
+  .vertex-canvas-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  /* Cheerful background glows */
+  .merry-ambient-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    overflow: hidden;
+    filter: blur(150px);
+    opacity: 0.28;
+  }
+
+  .glow-field {
+    position: absolute;
+    border-radius: 50%;
+    animation: drift 20s infinite alternate ease-in-out;
+  }
+
+  .field-coral {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 94, 54, 0.22) 0%, transparent 75%);
+    top: -10%;
+    left: 5%;
+  }
+
+  .field-gold {
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.2) 0%, transparent 75%);
+    bottom: -10%;
+    right: 10%;
+    animation-delay: -6s;
+  }
+
+  .field-teal {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 75%);
+    top: 25%;
+    left: 40%;
+    animation-delay: -12s;
+  }
+
+  @keyframes drift {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(60px, -45px) scale(1.15); }
+    100% { transform: translate(-45px, 60px) scale(0.9); }
+  }
+
+  .container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 0 16px;
+    }
+  }
+
+  .section {
+    padding: 64px 0;
+    position: relative;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  @media (max-width: 600px) {
+    .section {
+      padding: 48px 0;
+    }
+  }
+
+  .meta-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    color: var(--color-brand);
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+    background: var(--color-bg-alt);
+    padding: 4px 10px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 2px;
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    color: var(--color-text);
+    margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  /* Form Elements */
+  input, select, textarea {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-text);
+    padding: 12px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    outline: none;
+    transition: all var(--transition-smooth);
+    width: 100%;
+    border-radius: 3px;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 3px var(--color-brand-glow);
+  }
+
+  button {
+    background: var(--color-text);
+    color: var(--color-bg);
+    border: 1px solid var(--color-text);
+    padding: 14px 28px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all var(--transition-smooth);
+    border-radius: 3px;
+  }
+
+  button:hover {
+    background: var(--color-brand);
+    border-color: var(--color-brand);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--color-brand-glow);
+  }
+
+  .brand-card {
+    background: rgba(255, 253, 249, 0.65);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    border: 1px solid rgba(255, 94, 54, 0.08);
+    box-shadow: 0 8px 32px rgba(255, 94, 54, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    padding: 28px;
+    border-radius: 12px;
+    position: relative;
+    transition: all var(--transition-smooth);
+  }
+
+  .brand-card:hover {
+    border-color: rgba(255, 94, 54, 0.25);
+    background: rgba(255, 253, 249, 0.85);
+    box-shadow: 0 12px 40px rgba(255, 94, 54, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transform: translateY(-4px);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-text-darker);
+  }
+</style>
+
+<script>
+  // Performant Interactive Canvas Vertex Particle system
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('vertex-canvas') as HTMLCanvasElement;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    // Resize listener with throttle
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        width = (canvas.width = window.innerWidth);
+        height = (canvas.height = window.innerHeight);
+        initParticles();
+      }, 150);
+    });
+
+    // Color palette matching the 5 zones
+    const zoneColors = [
+      'rgba(255, 94, 54, 0.20)',  // Coral
+      'rgba(14, 165, 233, 0.20)', // Sky Blue
+      'rgba(16, 185, 129, 0.20)', // Fresh Green
+      'rgba(245, 158, 11, 0.20)', // Sunny Yellow
+      'rgba(236, 72, 153, 0.20)'  // Playful Pink
+    ];
+
+    class Particle {
+      x: number = 0;
+      y: number = 0;
+      vx: number = 0;
+      vy: number = 0;
+      radius: number = 0;
+      color: string = '';
+
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.16;
+        this.vy = (Math.random() - 0.5) * 0.16;
+        this.radius = Math.random() * 1.5 + 1.2;
+        this.color = zoneColors[Math.floor(Math.random() * zoneColors.length)];
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Bounce off canvas boundaries
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+
+      draw() {
+        if (!ctx) return;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    let particles: Particle[] = [];
+
+    function initParticles() {
+      // Density calculation: 1 particle per 32,000 pixels, max 35
+      const count = Math.min(Math.floor((width * height) / 32000), 35);
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    initParticles();
+
+    // Mouse tracking for interactive vertices
+    const mouse = { x: 0, y: 0, active: false };
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.active = true;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.active = false;
+    });
+
+    function animate() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+
+      // Update and draw particles
+      particles.forEach((p) => {
+        p.update();
+        p.draw();
+      });
+
+      // Draw connection lines (Vertices)
+      for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i];
+
+        // Connect particles to each other
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 85) {
+            const alpha = (1 - dist / 85) * 0.06;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(255, 94, 54, ${alpha})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+
+        // Connect particles to the cursor
+        if (mouse.active) {
+          const dx = p1.x - mouse.x;
+          const dy = p1.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 95) {
+            const alpha = (1 - dist / 95) * 0.08;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `rgba(14, 165, 233, ${alpha})`;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  });
+</script>

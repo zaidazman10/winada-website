@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
+  <!-- Brand logo path -->
+  <path 
+    d="M 6 10 L 14 30 L 20 18 L 26 30 L 34 10" 
+    stroke="#ff5e36" 
+    stroke-width="3" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
+  />
+  <!-- Accent indicator dot -->
+  <circle cx="34" cy="10" r="2.5" fill="#ff5e36" />
+</svg>

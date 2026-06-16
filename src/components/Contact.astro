@@ -1,0 +1,206 @@
+---
+// Contact - Compact two-column quotation & consultation request brief
+---
+
+<section class="section" id="contact">
+  <div class="container contact-container">
+    <div class="contact-columns">
+      
+      <!-- Left Column: Copy Details -->
+      <div class="contact-left-col">
+        <span class="meta-tag">[ INQUIRY: PROJECT BRIEF ]</span>
+        <h2 class="section-title">Get in Touch.</h2>
+        <p class="section-desc">
+          We design custom audio setups for restaurants, workspaces, and luxury homes. Tell us about your project and we will help you build the perfect setup.
+        </p>
+
+        <div class="contact-meta-group">
+          <div class="meta-item">
+            <span>TECHNICAL OPERATIONS</span>
+            <p>deploy@winada.com</p>
+          </div>
+          <div class="meta-item">
+            <span>OFFICE HEADQUARTERS</span>
+            <p>Kuala Lumpur, Malaysia</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Form Brief Deck -->
+      <div class="brand-card form-deck-frame">
+        <div class="deck-indicator">[ WINADA PROJECT BRIEF ]</div>
+        
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">YOUR NAME</label>
+              <input type="text" id="name" placeholder="Ahmad Razif" required />
+            </div>
+            <div class="form-group">
+              <label for="email">EMAIL ADDRESS</label>
+              <input type="email" id="email" placeholder="contact@winada.com" required />
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="domain">PROJECT TYPE</label>
+              <select id="domain" required>
+                <option value="" disabled selected>SELECT TYPE</option>
+                <option value="lounge">Restaurant, Cafe, or Bar</option>
+                <option value="office">Office or Workspace</option>
+                <option value="residential">Luxury Home or Apartment</option>
+                <option value="custom">Other Custom Setup</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="nodes">NUMBER OF ROOMS / ZONES</label>
+              <select id="nodes" required>
+                <option value="" disabled selected>SELECT SIZE</option>
+                <option value="small">1 - 4 rooms</option>
+                <option value="medium">5 - 16 rooms</option>
+                <option value="large">17 - 64 rooms</option>
+                <option value="enterprise">64+ rooms</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="details">PROJECT DETAILS</label>
+            <textarea id="details" rows="3" placeholder="Tell us how you plan to use the system, which streaming services you need, or any special requests..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Inquiry</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-container {
+    border-top: 1px solid var(--color-border);
+    padding-top: 64px;
+  }
+
+  /* Compact two-column split layout */
+  .contact-columns {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .contact-left-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .contact-meta-group {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-top: 1px dashed var(--color-border-strong);
+    padding-top: 24px;
+    width: 100%;
+  }
+
+  .meta-item span {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-darker);
+    display: block;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .meta-item p {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  /* Form Deck Frame styling */
+  .form-deck-frame {
+    width: 100%;
+    padding: 32px;
+    position: relative;
+    text-align: left;
+  }
+
+  .deck-indicator {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--color-text-darker);
+    position: absolute;
+    top: 12px;
+    left: 20px;
+  }
+
+  .contact-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 12px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+  }
+
+  .form-group select {
+    cursor: pointer;
+  }
+
+  .form-group textarea {
+    resize: vertical;
+  }
+
+  .submit-btn {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 900px) {
+    .contact-columns {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .form-deck-frame {
+      padding: 24px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .contact-meta-group {
+      margin-top: 24px;
+      gap: 16px;
+    }
+  }
+</style>

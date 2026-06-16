@@ -1,0 +1,104 @@
+---
+// BrandHeader - Official top bar featuring the geometric Winada Wave Logo mark
+---
+
+<header class="brand-header">
+  <div class="container header-inner">
+    <a href="/" class="brand-logo">
+      <!-- Geometric W ribbon soundwave logo mark -->
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+        <path 
+          d="M 6 10 L 14 30 L 20 18 L 26 30 L 34 10" 
+          stroke="var(--color-brand)" 
+          stroke-width="3" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+        />
+        <!-- Accent indicator dot -->
+        <circle cx="34" cy="10" r="2" fill="var(--color-brand)" />
+      </svg>
+      <span class="brand-name">winada <span class="brand-product">multizone audio</span></span>
+    </a>
+
+    <div class="header-status">
+      <span class="status-pulse"></span>
+      <span class="status-label">[ SYSTEM STATUS: SECURED ]</span>
+    </div>
+  </div>
+</header>
+
+<style>
+  .brand-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 32px 0;
+    z-index: 10;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+  }
+
+  .brand-name {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .brand-product {
+    font-weight: 300;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin-left: 2px;
+  }
+
+  .header-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .status-pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #0b8478;
+    box-shadow: 0 0 6px #0b8478;
+    animation: status-glow 2s infinite alternate;
+  }
+
+  .status-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-darker);
+  }
+
+  @keyframes status-glow {
+    0% { opacity: 0.4; }
+    100% { opacity: 1; }
+  }
+
+  @media (max-width: 600px) {
+    .header-status {
+      display: none;
+    }
+  }
+</style>
