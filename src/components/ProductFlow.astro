@@ -265,10 +265,10 @@
     .labels-container {
       position: relative;
       inset: auto;
-      padding: 20px 0 0 0;
+      padding: 24px 0 0 0;
       display: flex;
-      justify-content: space-between;
-      gap: 16px;
+      flex-direction: column;
+      gap: 20px;
       pointer-events: auto;
     }
 
@@ -279,12 +279,21 @@
       top: auto;
     }
 
-    .label-item p {
-      display: none;
+    .sinks-labels {
+      position: relative;
+      right: auto;
+      top: auto;
+      bottom: auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      height: auto;
+      padding: 16px 0 0 0;
+      border-top: 1px dashed var(--color-border-strong);
     }
 
-    .sinks-labels {
-      display: none;
+    .sink-label {
+      position: relative;
     }
   }
 </style>
