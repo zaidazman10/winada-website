@@ -1,5 +1,5 @@
 ---
-// BrandHeader - Official top bar featuring the geometric Winada Wave Logo mark
+// BrandHeader - Clean, minimalist header featuring the Winada logo and wordmark
 ---
 
 <header class="brand-header">
@@ -15,15 +15,10 @@
           stroke-linejoin="round"
         />
         <!-- Accent indicator dot -->
-        <circle cx="34" cy="10" r="2" fill="var(--color-brand)" />
+        <circle cx="34" cy="10" r="2.5" fill="var(--color-brand)" />
       </svg>
       <span class="brand-name">winada <span class="brand-product">multizone audio</span></span>
     </a>
-
-    <div class="header-status">
-      <span class="status-pulse"></span>
-      <span class="status-label">[ SYSTEM STATUS: SECURED ]</span>
-    </div>
   </div>
 </header>
 
@@ -35,6 +30,12 @@
     right: 0;
     padding: 32px 0;
     z-index: 10;
+  }
+
+  @media (max-width: 600px) {
+    .brand-header {
+      padding: 16px 0;
+    }
   }
 
   .header-inner {
@@ -59,8 +60,9 @@
   .brand-name {
     font-family: var(--font-heading);
     font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
   }
 
   .brand-product {
@@ -68,37 +70,5 @@
     color: var(--color-text-muted);
     font-size: 0.9rem;
     margin-left: 2px;
-  }
-
-  .header-status {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .status-pulse {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #0b8478;
-    box-shadow: 0 0 6px #0b8478;
-    animation: status-glow 2s infinite alternate;
-  }
-
-  .status-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--color-text-darker);
-  }
-
-  @keyframes status-glow {
-    0% { opacity: 0.4; }
-    100% { opacity: 1; }
-  }
-
-  @media (max-width: 600px) {
-    .header-status {
-      display: none;
-    }
   }
 </style>

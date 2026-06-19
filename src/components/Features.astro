@@ -1,5 +1,5 @@
 ---
-// Features - Bento layout with brand-card cells and integrated animations
+// Features - Bento layout showing capabilities, followed by a detailed technical datasheet
 const capabilities = [
   {
     num: "01",
@@ -50,17 +50,16 @@ const technicalSpecs = [
     
     <!-- Capabilities Bento Layout -->
     <div class="capabilities-section">
-      <span class="meta-tag">[ CAPABILITIES: SPECIFICATION SETS ]</span>
       <h2 class="section-title">Built for seamless listening.</h2>
       
       <div class="bento-grid">
         {capabilities.map((cap, i) => (
           <div class="brand-card bento-cell" id={`bento-${i}`}>
             
-            <!-- Custom background brand logo watermark watermark -->
+            <!-- Custom background brand logo watermark -->
             <div class="card-brand-watermark">
               <svg viewBox="0 0 100 100" fill="none">
-                <path d="M 15 25 L 35 75 L 50 45 L 65 75 L 85 25" stroke="rgba(240, 84, 35, 0.03)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M 15 25 L 35 75 L 50 45 L 65 75 L 85 25" stroke="rgba(226, 138, 66, 0.025)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
 
@@ -70,7 +69,7 @@ const technicalSpecs = [
               <p class="cell-desc">{cap.desc}</p>
             </div>
             
-            {/* Infographics: Mini CSS animations inside bento cells */}
+            {/* Infographics: Clean static/subtle CSS animations in blueprint style */}
             {i === 2 && (
               <div class="mini-equalizer">
                 <span class="eq-bar" style="--h: 18px; --delay: 0.1s"></span>
@@ -84,7 +83,7 @@ const technicalSpecs = [
             {i === 0 && (
               <div class="mini-lock-gauge">
                 <span class="gauge-ring"></span>
-                <span class="gauge-text">SYNC LOCK Active</span>
+                <span class="gauge-text">SYNC LOCK ACTIVE</span>
               </div>
             )}
 
@@ -97,7 +96,7 @@ const technicalSpecs = [
 
             {i === 3 && (
               <div class="mini-sec-shield">
-                <span class="shield-indicator">PIN [****]</span>
+                <span class="shield-indicator">PIN ACTIVE [****]</span>
               </div>
             )}
           </div>
@@ -107,7 +106,6 @@ const technicalSpecs = [
 
     <!-- Technical Specs sheet -->
     <div class="tech-specs-section">
-      <span class="meta-tag">[ SPECIFICATIONS: DATASHEET ]</span>
       <h2 class="section-title">Technical specifications.</h2>
       
       <div class="tech-grid">
@@ -136,7 +134,7 @@ const technicalSpecs = [
     padding-top: 80px;
     display: flex;
     flex-direction: column;
-    gap: 120px;
+    gap: 100px;
   }
 
   .capabilities-section, .tech-specs-section {
@@ -200,7 +198,7 @@ const technicalSpecs = [
     font-weight: 300;
   }
 
-  /* Mini infographics styled on brand layout */
+  /* Mini infographics styled on blueprint layout */
   .mini-equalizer {
     display: flex;
     align-items: flex-end;
@@ -242,7 +240,7 @@ const technicalSpecs = [
     position: absolute;
     inset: -4px;
     border-radius: 50%;
-    border: 1px dashed rgba(11, 132, 120, 0.4);
+    border: 1px dashed rgba(37, 99, 235, 0.4);
     animation: rot-pulse 8s infinite linear;
   }
 
@@ -258,7 +256,7 @@ const technicalSpecs = [
     height: 16px;
     position: relative;
     margin-top: 24px;
-    background: rgba(18,18,20,0.03);
+    background: rgba(18, 19, 21, 0.02);
     border-radius: 2px;
     overflow: hidden;
     display: flex;
@@ -286,7 +284,7 @@ const technicalSpecs = [
 
   .mini-sec-shield {
     margin-top: 24px;
-    background: rgba(18,18,20,0.03);
+    background: rgba(18, 19, 21, 0.02);
     padding: 6px 12px;
     border-radius: 4px;
     font-family: var(--font-mono);
@@ -294,6 +292,7 @@ const technicalSpecs = [
     color: var(--color-text-muted);
     border: 1px solid var(--color-border);
     z-index: 1;
+    display: inline-block;
   }
 
   /* Technical Specs cards layout */
@@ -306,11 +305,6 @@ const technicalSpecs = [
 
   .spec-cat-card {
     padding: 32px;
-  }
-
-  .tech-cat {
-    display: flex;
-    flex-direction: column;
   }
 
   .cat-title {

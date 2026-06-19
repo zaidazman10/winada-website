@@ -1,25 +1,20 @@
 ---
-// Hero - Branded two-column layout with a floating audio vertex network
+// Hero - Minimalist blueprint-themed two-column showcase
 ---
 
 <section class="hero" id="hero">
   <div class="container hero-container">
     
     <div class="hero-columns">
-      <!-- Left Column: Content and Infographic -->
+      <!-- Left Column: Copywriting and Infographic -->
       <div class="hero-left-col">
-        <div class="hero-top-row">
-          <span class="meta-tag">[ CORE: WINADA.v1 ]</span>
-          <span class="meta-tag">[ NETWORK: LOCK ACTIVE ]</span>
-        </div>
-
         <div class="hero-text-block">
-          <div class="hero-brand">winada multizone audio</div>
+          <div class="hero-brand">winada multizone controller</div>
           <h1 class="hero-title">
             Music in every room. Perfect sync.
           </h1>
           <p class="hero-intro">
-            Winada lets you play music, stream radio, and make voice announcements across multiple rooms at the same time. It keeps speakers perfectly in sync with zero delay, and makes it easy to control what plays where.
+            Winada is a software audio controller that distributes music, streaming feeds, and voice announcements across multiple speaker zones. It keeps different hardware systems perfectly synchronized with zero delay, and makes routing simple.
           </p>
         </div>
 
@@ -27,82 +22,82 @@
         <div class="hero-specs-infographic">
           <div class="info-grid">
             <div class="info-column">
-              <div class="info-label">[ WINADA LATENCY LOCK ]</div>
+              <div class="info-label">[ WINADA CONTROLLER CORE ]</div>
               <div class="latency-line winada-line">
                 <span class="indicator-dot"></span>
               </div>
-              <div class="info-value value-teal">&lt; 0.8ms (perfectly sync'd)</div>
+              <div class="info-value value-cobalt">&lt; 0.8ms (perfectly sync'd)</div>
             </div>
 
             <div class="info-column">
-              <div class="info-label">[ STANDARD AUDIO ECHO ]</div>
+              <div class="info-label">[ STANDARD NETWORK ROUTING ]</div>
               <div class="latency-line standard-line">
                 <span></span><span></span><span></span><span></span><span></span>
               </div>
-              <div class="info-value value-orange">~120ms (noticeable delay)</div>
+              <div class="info-value value-muted">~120ms (noticeable echo)</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Right Column: Visual Core with Vertex Network -->
+      <!-- Right Column: Visual Blueprint Network -->
       <div class="hero-right-col">
         <div class="vertex-network-container">
           
-          <!-- SVG Vertex audio network -->
+          <!-- SVG Blueprint audio network -->
           <svg class="vertex-svg" viewBox="0 0 300 300">
             <!-- Connecting lines (Vertices) fanning from W logo at center (150, 150) -->
-            <line x1="150" y1="150" x2="60" y2="70" stroke="var(--color-border-strong)" stroke-width="1.5" stroke-dasharray="3 3" />
-            <line x1="150" y1="150" x2="240" y2="60" stroke="var(--color-border-strong)" stroke-width="1.5" stroke-dasharray="3 3" />
-            <line x1="150" y1="150" x2="250" y2="210" stroke="var(--color-border-strong)" stroke-width="1.5" stroke-dasharray="3 3" />
-            <line x1="150" y1="150" x2="60" y2="230" stroke="var(--color-border-strong)" stroke-width="1.5" stroke-dasharray="3 3" />
-            <line x1="150" y1="150" x2="150" y2="260" stroke="var(--color-border-strong)" stroke-width="1.5" stroke-dasharray="3 3" />
+            <line x1="150" y1="150" x2="60" y2="70" stroke="var(--color-border-strong)" stroke-width="1.2" stroke-dasharray="3 3" />
+            <line x1="150" y1="150" x2="240" y2="60" stroke="var(--color-border-strong)" stroke-width="1.2" stroke-dasharray="3 3" />
+            <line x1="150" y1="150" x2="250" y2="210" stroke="var(--color-border-strong)" stroke-width="1.2" stroke-dasharray="3 3" />
+            <line x1="150" y1="150" x2="60" y2="230" stroke="var(--color-border-strong)" stroke-width="1.2" stroke-dasharray="3 3" />
+            <line x1="150" y1="150" x2="150" y2="260" stroke="var(--color-border-strong)" stroke-width="1.2" stroke-dasharray="3 3" />
 
             <!-- Connecting ring loop -->
-            <circle cx="150" cy="150" r="110" fill="none" stroke="var(--color-border)" stroke-width="1.5" />
+            <circle cx="150" cy="150" r="110" fill="none" stroke="var(--color-border)" stroke-width="1.2" />
 
             <!-- Floating Zone Nodes (Vertices) -->
-            <!-- Zone 1 (Coral) -->
-            <circle cx="60" cy="70" r="7" fill="var(--color-zone-1)" class="pulse-vertex" />
-            <!-- Zone 2 (Sky Blue) -->
-            <circle cx="240" cy="60" r="7" fill="var(--color-zone-2)" class="pulse-vertex" />
-            <!-- Zone 3 (Fresh Green) -->
-            <circle cx="250" cy="210" r="7" fill="var(--color-zone-3)" class="pulse-vertex" />
-            <!-- Zone 4 (Amber) -->
-            <circle cx="60" cy="230" r="7" fill="var(--color-zone-4)" class="pulse-vertex" />
-            <!-- Zone 5 (Rose) -->
-            <circle cx="150" cy="260" r="7" fill="var(--color-zone-5)" class="pulse-vertex" />
+            <!-- Zone 1 (Copper) -->
+            <circle cx="60" cy="70" r="6" fill="var(--color-zone-1)" class="pulse-vertex" />
+            <!-- Zone 2 (Cobalt Blue) -->
+            <circle cx="240" cy="60" r="6" fill="var(--color-zone-2)" class="pulse-vertex" />
+            <!-- Zone 3 (Teal) -->
+            <circle cx="250" cy="210" r="6" fill="var(--color-zone-3)" class="pulse-vertex" />
+            <!-- Zone 4 (Indigo) -->
+            <circle cx="60" cy="230" r="6" fill="var(--color-zone-4)" class="pulse-vertex" />
+            <!-- Zone 5 (Steel Slate) -->
+            <circle cx="150" cy="260" r="6" fill="var(--color-zone-5)" class="pulse-vertex" />
 
-            <!-- Interactive signal node pulses drifting along vertices -->
-            <circle r="3" fill="var(--color-brand)">
-              <animateMotion dur="2.5s" repeatCount="indefinite" path="M 150 150 L 60 70" />
+            <!-- Signal nodes drifting along vertices -->
+            <circle r="3.5" fill="var(--color-zone-2)">
+              <animateMotion dur="3s" repeatCount="indefinite" path="M 150 150 L 60 70" />
             </circle>
-            <circle r="3" fill="var(--color-zone-2)">
-              <animateMotion dur="3s" begin="0.5s" repeatCount="indefinite" path="M 150 150 L 240 60" />
+            <circle r="3.5" fill="var(--color-zone-1)">
+              <animateMotion dur="3.5s" begin="0.5s" repeatCount="indefinite" path="M 150 150 L 240 60" />
             </circle>
-            <circle r="3" fill="var(--color-zone-3)">
-              <animateMotion dur="2.2s" begin="0.8s" repeatCount="indefinite" path="M 150 150 L 250 210" />
+            <circle r="3.5" fill="var(--color-zone-3)">
+              <animateMotion dur="2.7s" begin="0.8s" repeatCount="indefinite" path="M 150 150 L 250 210" />
             </circle>
-            <circle r="3" fill="var(--color-zone-4)">
-              <animateMotion dur="2.7s" begin="1.2s" repeatCount="indefinite" path="M 150 150 L 60 230" />
+            <circle r="3.5" fill="var(--color-zone-4)">
+              <animateMotion dur="3.2s" begin="1.2s" repeatCount="indefinite" path="M 150 150 L 60 230" />
             </circle>
-            <circle r="3" fill="var(--color-zone-5)">
-              <animateMotion dur="2.4s" begin="0.3s" repeatCount="indefinite" path="M 150 150 L 150 260" />
+            <circle r="3.5" fill="var(--color-zone-5)">
+              <animateMotion dur="2.9s" begin="0.3s" repeatCount="indefinite" path="M 150 150 L 150 260" />
             </circle>
           </svg>
 
-          <!-- Central Brand W logo hub -->
+          <!-- Central Controller W logo hub -->
           <div class="brand-wave-core">
             <svg class="hero-w-logo" viewBox="0 0 100 100" fill="none">
               <path 
                 d="M 15 25 L 35 75 L 50 45 L 65 75 L 85 25" 
                 stroke="var(--color-brand)" 
-                stroke-width="5.5" 
+                stroke-width="5" 
                 stroke-linecap="round" 
                 stroke-linejoin="round"
                 class="w-path-animated"
               />
-              <circle cx="85" cy="25" r="4.5" fill="var(--color-brand)" />
+              <circle cx="85" cy="25" r="4" fill="var(--color-brand)" />
             </svg>
             <div class="core-radial-glow"></div>
           </div>
@@ -119,8 +114,8 @@
     display: flex;
     align-items: center;
     position: relative;
-    padding-top: 100px;
-    padding-bottom: 40px;
+    padding-top: 120px;
+    padding-bottom: 60px;
     border-bottom: 1px solid var(--color-border);
   }
 
@@ -138,14 +133,8 @@
   .hero-left-col {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 32px;
     text-align: left;
-  }
-
-  .hero-top-row {
-    display: flex;
-    gap: 12px;
-    align-items: center;
   }
 
   .hero-brand {
@@ -171,7 +160,7 @@
     line-height: 1.6;
   }
 
-  /* Right column: Vertex audio network visual */
+  /* Right column: Blueprint network visual */
   .hero-right-col {
     display: flex;
     justify-content: center;
@@ -214,7 +203,7 @@
     background: var(--color-bg);
     border-radius: 50%;
     border: 1px solid var(--color-border-strong);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    box-shadow: 0 4px 24px rgba(18, 19, 21, 0.02);
   }
 
   .hero-w-logo {
@@ -243,7 +232,6 @@
   .hero-specs-infographic {
     border-top: 1px dashed var(--color-border-strong);
     padding-top: 24px;
-    margin-top: 8px;
   }
 
   .info-grid {
@@ -264,7 +252,7 @@
     height: 16px;
     background: var(--color-bg-alt);
     border: 1px solid var(--color-border);
-    border-radius: 2px;
+    border-radius: 4px;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -279,8 +267,8 @@
     left: 12px;
     right: 12px;
     height: 1.5px;
-    background: #10b981;
-    box-shadow: 0 0 4px #10b981;
+    background: var(--color-zone-2);
+    box-shadow: 0 0 4px var(--color-zone-2);
   }
 
   .indicator-dot {
@@ -288,9 +276,9 @@
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    background: #10b981;
+    background: var(--color-zone-2);
     z-index: 2;
-    animation: move-pulse 2s infinite linear;
+    animation: move-pulse 2.5s infinite linear;
   }
 
   .standard-line {
@@ -301,7 +289,7 @@
 
   .standard-line span {
     width: 2.5px;
-    background: var(--color-brand);
+    background: var(--color-text-darker);
     border-radius: 1px;
     animation: scatter-bounce 0.8s infinite alternate;
   }
@@ -318,8 +306,8 @@
     font-weight: 600;
   }
 
-  .value-teal { color: #10b981; }
-  .value-orange { color: var(--color-brand); }
+  .value-cobalt { color: var(--color-zone-2); }
+  .value-muted { color: var(--color-text-muted); }
 
   @keyframes draw-logo {
     0% { stroke-dashoffset: 400; }
@@ -332,8 +320,8 @@
   }
 
   @keyframes vertex-pulse {
-    0% { transform: scale(0.85); opacity: 0.8; }
-    100% { transform: scale(1.15); opacity: 1; }
+    0% { transform: scale(0.9); opacity: 0.8; }
+    100% { transform: scale(1.1); opacity: 1; }
   }
 
   @keyframes move-pulse {
@@ -355,7 +343,7 @@
 
   @media (max-width: 600px) {
     .hero {
-      padding-top: 80px;
+      padding-top: 100px;
       padding-bottom: 24px;
       min-height: auto;
     }
