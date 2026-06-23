@@ -1,25 +1,31 @@
 ---
-// Footer - Minimal, clean copyright aligned to the blueprint layout
+// Footer - Obsidian style minimal footer
 ---
 
 <footer class="footer">
   <div class="container">
-    <div class="brand-card footer-deck">
+    <div class="footer-console-plate">
       <div class="footer-left">
-        <!-- Folded W wave logo mark -->
+        <!-- Fluid bezier soundwave gradient logo mark -->
         <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+          <defs>
+            <linearGradient id="footer-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--color-accent-cyan)" />
+              <stop offset="100%" stop-color="var(--color-accent-pink)" />
+            </linearGradient>
+          </defs>
           <path 
-            d="M 6 10 L 14 30 L 20 18 L 26 30 L 34 10" 
-            stroke="var(--color-brand)" 
-            stroke-width="3" 
+            d="M 6 18 C 10 5, 14 35, 18 20 C 22 5, 26 35, 34 18" 
+            stroke="url(#footer-logo-grad)" 
+            stroke-width="2.5" 
             stroke-linecap="round" 
             stroke-linejoin="round"
           />
         </svg>
-        <span class="brand-sub">winada <span class="sub-product">multizone controller</span></span>
+        <span class="brand-sub">winada <span class="sub-product">controller</span></span>
       </div>
       <div class="footer-right">
-        &copy; {new Date().getFullYear()} Winada. Built for Linux hardware.
+        &copy; {new Date().getFullYear()} Winada. Built for simple, reliable multi-room music control.
       </div>
     </div>
   </div>
@@ -27,25 +33,26 @@
 
 <style>
   .footer {
-    padding: 80px 0 60px;
+    padding-top: 48px;
+    padding-bottom: 60px;
     background: transparent;
   }
 
-  .footer-deck {
+  .footer-console-plate {
+    border-top: 1px solid var(--color-border);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
     color: var(--color-text-muted);
-    padding: 24px 32px;
+    padding-top: 28px;
   }
 
   .logo-mark {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
   }
 
   .footer-left {
@@ -55,21 +62,25 @@
   }
 
   .brand-sub {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-text);
   }
 
   .sub-product {
-    font-weight: 300;
+    font-weight: 400;
     color: var(--color-text-muted);
   }
 
+  .footer-right {
+    font-weight: 400;
+  }
+
   @media (max-width: 600px) {
-    .footer-deck {
+    .footer-console-plate {
       flex-direction: column;
       gap: 16px;
       text-align: center;
-      padding: 24px;
+      padding-top: 24px;
     }
   }
 </style>

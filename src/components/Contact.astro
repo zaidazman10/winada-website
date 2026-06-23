@@ -1,5 +1,5 @@
 ---
-// Contact - Clean two-column deployment consultation brief form
+// Contact - Obsidian Glass Deployment Configurator
 ---
 
 <section class="section" id="contact">
@@ -8,9 +8,10 @@
       
       <!-- Left Column: Copy details -->
       <div class="contact-left-col">
-        <h2 class="section-title">Get in Touch.</h2>
+        <span class="meta-tag">[ MODULE 03 // DEPLOYMENT CONFIGURATOR ]</span>
+        <h2 class="section-title">Configure your control setup.</h2>
         <p class="section-desc">
-          We design custom audio routing setups for restaurants, workspaces, and luxury homes. Tell us about your project and we will help you engineer the perfect solution.
+          We design custom multizone audio control systems for restaurants, workspaces, and luxury homes. Tell us about your project and we will help you engineer the perfect setup.
         </p>
 
         <div class="contact-meta-group">
@@ -25,9 +26,9 @@
         </div>
       </div>
 
-      <!-- Right Column: Consultation Form Card -->
+      <!-- Right Column: Configurator Form -->
       <div class="brand-card form-deck-frame">
-        <div class="deck-indicator">[ WINADA PROJECT BRIEF ]</div>
+        <div class="deck-indicator">[ PARAMETER SETUP ]</div>
         
         <form class="contact-form" id="contact-form">
           <div class="form-row">
@@ -41,32 +42,31 @@
             </div>
           </div>
           
-          <div class="form-row">
-            <div class="form-group">
-              <label for="domain">PROJECT TYPE</label>
-              <select id="domain" required>
-                <option value="" disabled selected>SELECT TYPE</option>
-                <option value="lounge">Restaurant, Cafe, or Bar</option>
-                <option value="office">Office or Workspace</option>
-                <option value="residential">Luxury Home or Apartment</option>
-                <option value="custom">Other Custom Setup</option>
-              </select>
+          <div class="form-group">
+            <label>PROJECT TYPE</label>
+            <div class="toggle-grid" data-group="domain">
+              <button type="button" class="toggle-btn selected" data-value="lounge">LOUNGE / DINING</button>
+              <button type="button" class="toggle-btn" data-value="office">OFFICE WORKSPACE</button>
+              <button type="button" class="toggle-btn" data-value="residential">LUXURY HOME</button>
+              <button type="button" class="toggle-btn" data-value="custom">CUSTOM SETUP</button>
             </div>
-            <div class="form-group">
-              <label for="nodes">NUMBER OF ROOMS / ZONES</label>
-              <select id="nodes" required>
-                <option value="" disabled selected>SELECT SIZE</option>
-                <option value="small">1 - 4 zones</option>
-                <option value="medium">5 - 16 zones</option>
-                <option value="large">17 - 64 zones</option>
-                <option value="enterprise">64+ zones</option>
-              </select>
-            </div>
+            <input type="hidden" id="domain" value="lounge" required />
           </div>
 
           <div class="form-group">
-            <label for="details">PROJECT DETAILS</label>
-            <textarea id="details" rows="3" placeholder="Tell us how you plan to use the system, which streaming services you need, or any special requests..."></textarea>
+            <label>NUMBER OF ZONES</label>
+            <div class="toggle-grid" data-group="nodes">
+              <button type="button" class="toggle-btn selected" data-value="small">1 - 4 ZONES</button>
+              <button type="button" class="toggle-btn" data-value="medium">5 - 16 ZONES</button>
+              <button type="button" class="toggle-btn" data-value="large">17 - 64 ZONES</button>
+              <button type="button" class="toggle-btn" data-value="enterprise">64+ ZONES</button>
+            </div>
+            <input type="hidden" id="nodes" value="small" required />
+          </div>
+
+          <div class="form-group">
+            <label for="details">PROJECT DETAILS & REQUIREMENTS</label>
+            <textarea id="details" rows="3" placeholder="Tell us how you plan to use the system, how many control touchpads you require, or any special routing requests..."></textarea>
           </div>
 
           <button type="submit" class="submit-btn">Send Inquiry</button>
@@ -77,16 +77,70 @@
   </div>
 </section>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const grids = document.querySelectorAll('.toggle-grid');
+    
+    grids.forEach(grid => {
+      const groupName = grid.getAttribute('data-group');
+      const hiddenInput = groupName ? document.getElementById(groupName) : null;
+      const buttons = grid.querySelectorAll('.toggle-btn');
+      
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          
+          const val = btn.getAttribute('data-value');
+          if (hiddenInput && val) {
+            (hiddenInput as HTMLInputElement).value = val;
+          }
+        });
+      });
+    });
+
+    // Form submission feedback
+    const form = document.getElementById('contact-form');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = form.querySelector('.submit-btn') as HTMLButtonElement;
+        if (submitBtn) {
+          const originalText = submitBtn.textContent;
+          submitBtn.textContent = "INQUIRY SUBMITTED";
+          submitBtn.classList.add('sent');
+          submitBtn.disabled = true;
+          
+          setTimeout(() => {
+            submitBtn.textContent = originalText;
+            submitBtn.classList.remove('sent');
+            submitBtn.disabled = false;
+            (form as HTMLFormElement).reset();
+            
+            // Reset toggles to default
+            grids.forEach(grid => {
+              const buttons = grid.querySelectorAll('.toggle-btn');
+              buttons.forEach((b, idx) => {
+                if (idx === 0) b.classList.add('selected');
+                else b.classList.remove('selected');
+              });
+            });
+          }, 2500);
+        }
+      });
+    }
+  });
+</script>
+
 <style>
   .contact-container {
-    border-top: 1px solid var(--color-border);
-    padding-top: 64px;
+    padding-top: 24px;
+    padding-bottom: 24px;
   }
 
-  /* Compact two-column split layout */
   .contact-columns {
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-columns: 0.95fr 1.05fr;
     gap: 48px;
     align-items: start;
   }
@@ -99,34 +153,34 @@
   }
 
   .contact-meta-group {
-    margin-top: 32px;
+    margin-top: 36px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    border-top: 1px dashed var(--color-border-strong);
-    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
+    padding-top: 28px;
     width: 100%;
   }
 
   .meta-item span {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    color: var(--color-text-darker);
+    color: var(--color-text-muted);
     display: block;
     margin-bottom: 4px;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
   }
 
   .meta-item p {
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 0.95rem;
+    font-weight: 600;
     color: var(--color-text);
   }
 
   /* Form Card styling */
   .form-deck-frame {
     width: 100%;
-    padding: 32px;
+    padding: 36px 32px 32px;
     position: relative;
     text-align: left;
   }
@@ -134,10 +188,11 @@
   .deck-indicator {
     font-family: var(--font-mono);
     font-size: 0.6rem;
-    color: var(--color-text-darker);
+    color: var(--color-text-muted);
     position: absolute;
-    top: 12px;
-    left: 20px;
+    top: 14px;
+    left: 24px;
+    letter-spacing: 1px;
   }
 
   .contact-form {
@@ -158,48 +213,111 @@
   .form-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
   }
 
   .form-group label {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 1px;
     color: var(--color-text-muted);
   }
 
-  .form-group select {
+  /* Custom Toggle Grid layout */
+  .toggle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .toggle-btn {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    padding: 12px;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    text-align: center;
     cursor: pointer;
+    border-radius: 8px;
+    transition: all var(--transition-smooth);
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  .toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-text);
+  }
+
+  .toggle-btn.selected {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border-color: var(--color-accent-cyan);
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.08);
   }
 
   .form-group textarea {
     resize: vertical;
+    min-height: 80px;
   }
 
+  /* Gradient Glowing Submit Button */
   .submit-btn {
     width: 100%;
-    margin-top: 8px;
+    background: linear-gradient(135deg, var(--color-accent-cyan) 0%, var(--color-accent-pink) 100%);
+    color: #ffffff;
+    border: none;
+    padding: 14px 28px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border-radius: 8px;
+    position: relative;
+    transition: all var(--transition-smooth);
+    margin-top: 12px;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.3);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .submit-btn.sent {
+    background: var(--color-accent-green);
+    box-shadow: 0 0 24px rgba(57, 255, 20, 0.3);
+  }
+
+  .submit-btn:disabled {
+    cursor: not-allowed;
+    transform: none;
   }
 
   @media (max-width: 900px) {
     .contact-columns {
       grid-template-columns: 1fr;
-      gap: 40px;
-    }
-    .form-deck-frame {
-      padding: 24px;
+      gap: 32px;
     }
   }
 
   @media (max-width: 600px) {
     .form-row {
       grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    .contact-meta-group {
-      margin-top: 24px;
       gap: 16px;
+    }
+    .toggle-grid {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    .form-deck-frame {
+      padding: 24px 20px 20px;
     }
   }
 </style>

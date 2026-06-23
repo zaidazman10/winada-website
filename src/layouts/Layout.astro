@@ -5,8 +5,8 @@ interface Props {
 }
 
 const {
-  title = "Winada — Multizone Audio Controller",
-  description = "A professional, low-latency multi-zone audio controller and distribution core."
+  title = "Winada — Simple Multi-Room Music Control",
+  description = "A simple, reliable controller for multi-zone and multi-room audio systems in workspaces, restaurants, and homes."
 } = Astro.props;
 ---
 
@@ -24,13 +24,13 @@ const {
     <title>{title}</title>
   </head>
   <body>
-    <!-- Blueprint Dot Grid and Soft Ambient Background -->
-    <div class="blueprint-bg">
-      <div class="dot-grid"></div>
+    <!-- Obsidian Audio Ambient Background -->
+    <div class="obsidian-bg">
       <div class="ambient-glows">
-        <div class="glow-orb orb-apricot"></div>
-        <div class="glow-orb orb-blue"></div>
+        <div class="glow-orb orb-cyan"></div>
+        <div class="glow-orb orb-pink"></div>
       </div>
+      <div class="dot-grid"></div>
     </div>
 
     <slot />
@@ -38,7 +38,7 @@ const {
 </html>
 
 <style is:global>
-  /* ===== Minimalist Blueprint Design System ===== */
+  /* ===== Obsidian Audio Design System ===== */
   *,
   *::before,
   *::after {
@@ -48,35 +48,33 @@ const {
   }
 
   :root {
-    /* Pure plaster white & cool clay base */
-    --color-bg: #fcfcfb;
-    --color-bg-alt: #f5f5f3;
+    /* Deep space colors */
+    --color-bg: #090a0f;
+    --color-bg-alt: #11131c;
     
-    /* Deep carbon black */
-    --color-text: #121315;
-    --color-text-muted: #5a5d64;
-    --color-text-darker: #9ea2aa;
+    /* Clean high-contrast typography */
+    --color-text: #ffffff;
+    --color-text-muted: #8b8e9f;
+    --color-text-darker: #4a4d61;
     
-    /* Architectural accents */
-    --color-brand: #e28a42; /* Warm Copper */
-    --color-brand-glow: rgba(226, 138, 66, 0.06);
+    /* Neon glowing accents */
+    --color-brand: #00f0ff; /* Electric Cyan */
+    --color-brand-glow: rgba(0, 240, 255, 0.12);
     
-    /* Clean zone colors */
-    --color-zone-1: #e28a42; /* Copper Orange */
-    --color-zone-2: #2563eb; /* Cobalt Blue */
-    --color-zone-3: #0891b2; /* Deep Teal */
-    --color-zone-4: #4f46e5; /* Indigo */
-    --color-zone-5: #475569; /* Steel Slate */
+    --color-accent-cyan: #00f0ff;
+    --color-accent-pink: #ff007f;
+    --color-accent-green: #39ff14;
 
-    --color-border: rgba(18, 19, 21, 0.04);
-    --color-border-strong: rgba(18, 19, 21, 0.08);
+    /* Glassmorphism border styles */
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-border-strong: rgba(255, 255, 255, 0.15);
 
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
     --font-mono: 'Share Tech Mono', monospace;
 
     --container-width: 1040px;
-    --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   html {
@@ -95,58 +93,60 @@ const {
     position: relative;
   }
 
-  /* Dot Grid and Ambient Orbs Background */
-  .blueprint-bg {
+  /* Deep Space Ambient Glow Background */
+  .obsidian-bg {
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
+    background: radial-gradient(circle at 50% 50%, #11131e 0%, #090a0f 100%);
   }
 
   .dot-grid {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(18, 19, 21, 0.03) 1.2px, transparent 1.2px);
-    background-size: 24px 24px;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 32px 32px;
     z-index: 1;
+    opacity: 0.8;
   }
 
   .ambient-glows {
     position: absolute;
     inset: 0;
-    filter: blur(150px);
-    opacity: 0.18;
+    filter: blur(140px);
+    opacity: 0.22;
     z-index: 0;
   }
 
   .glow-orb {
     position: absolute;
     border-radius: 50%;
-    animation: drift 25s infinite alternate ease-in-out;
+    animation: drift 22s infinite alternate ease-in-out;
   }
 
-  .orb-apricot {
+  .orb-cyan {
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.35) 0%, transparent 75%);
+    top: -20%;
+    left: -10%;
+  }
+
+  .orb-pink {
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(226, 138, 66, 0.35) 0%, transparent 75%);
-    top: -15%;
-    left: -5%;
-  }
-
-  .orb-blue {
-    width: 550px;
-    height: 550px;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, transparent 75%);
+    background: radial-gradient(circle, rgba(255, 0, 127, 0.25) 0%, transparent 75%);
     bottom: -15%;
-    right: -5%;
-    animation-delay: -8s;
+    right: -10%;
+    animation-delay: -6s;
   }
 
   @keyframes drift {
     0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(50px, -30px) scale(1.1); }
-    100% { transform: translate(-30px, 50px) scale(0.95); }
+    50% { transform: translate(40px, -40px) scale(1.08); }
+    100% { transform: translate(-20px, 30px) scale(0.95); }
   }
 
   .container {
@@ -164,14 +164,14 @@ const {
   }
 
   .section {
-    padding: 64px 0;
+    padding: 80px 0;
     position: relative;
     border-bottom: 1px solid var(--color-border);
   }
 
   @media (max-width: 600px) {
     .section {
-      padding: 48px 0;
+      padding: 56px 0;
     }
   }
 
@@ -185,96 +185,102 @@ const {
     align-items: center;
     gap: 6px;
     margin-bottom: 16px;
-    background: var(--color-bg-alt);
-    padding: 4px 10px;
-    border: 1px solid var(--color-border-strong);
-    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 6px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
   }
 
   .section-title {
     font-family: var(--font-heading);
     font-size: clamp(2rem, 5vw, 2.75rem);
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: -0.03em;
-    line-height: 1.1;
+    line-height: 1.15;
     color: var(--color-text);
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
 
   .section-desc {
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: var(--color-text-muted);
-    font-weight: 300;
-    max-width: 580px;
+    font-weight: 400;
+    max-width: 620px;
     line-height: 1.6;
   }
 
-  /* Form Elements */
+  /* Form Elements - Glassmorphism */
   input, select, textarea {
-    background: var(--color-bg);
-    border: 1px solid var(--color-border-strong);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--color-border);
     color: var(--color-text);
-    padding: 12px;
+    padding: 14px;
     font-family: var(--font-body);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     outline: none;
     transition: all var(--transition-smooth);
     width: 100%;
-    border-radius: 4px;
+    border-radius: 8px;
   }
 
   input:focus, select:focus, textarea:focus {
+    background: rgba(255, 255, 255, 0.05);
     border-color: var(--color-brand);
-    box-shadow: 0 0 0 3px var(--color-brand-glow);
+    box-shadow: 0 0 16px var(--color-brand-glow);
   }
 
   button {
-    background: var(--color-text);
-    color: var(--color-bg);
-    border: 1px solid var(--color-text);
+    background: #ffffff;
+    color: #090a0f;
+    border: 1px solid #ffffff;
     padding: 14px 28px;
     font-family: var(--font-body);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    letter-spacing: 0.5px;
     cursor: pointer;
     transition: all var(--transition-smooth);
-    border-radius: 4px;
+    border-radius: 8px;
   }
 
   button:hover {
     background: var(--color-brand);
     border-color: var(--color-brand);
     color: #ffffff;
-    transform: translateY(-1px);
+    box-shadow: 0 0 24px var(--color-brand-glow);
   }
 
+  /* Glassmorphism Card Style */
   .brand-card {
-    background: rgba(252, 252, 251, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--color-border-strong);
-    padding: 28px;
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-border);
+    padding: 32px;
+    border-radius: 16px;
     position: relative;
     transition: all var(--transition-smooth);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
   }
 
   .brand-card:hover {
-    border-color: var(--color-brand);
-    background: rgba(252, 252, 251, 0.95);
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.04);
     transform: translateY(-2px);
   }
 
   /* Scrollbar */
   ::-webkit-scrollbar {
-    width: 4px;
+    width: 6px;
   }
   ::-webkit-scrollbar-track {
     background: var(--color-bg);
   }
   ::-webkit-scrollbar-thumb {
     background: var(--color-text-darker);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
   }
 </style>
