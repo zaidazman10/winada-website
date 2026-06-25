@@ -223,7 +223,7 @@
 
   .base-logo {
     color: #86868b;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     transform: rotateZ(45deg) rotateX(-60deg);
@@ -256,7 +256,7 @@
     border: 1px solid rgba(255,255,255,0.9);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 24px;
     padding: 24px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.05);
   }
@@ -272,8 +272,8 @@
     position: absolute;
     bottom: -32px;
     left: 0;
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 700;
     color: var(--color-text-secondary);
     transform: rotateZ(45deg) rotateX(-60deg);
     transform-origin: bottom left;
@@ -307,43 +307,47 @@
     height: 120px; /* only reaches floor 1 */
   }
 
-  /* Room Cards (Flat on the floors) */
+  /* Room Cards (Billboards facing the camera) */
   .iso-room {
-    background: rgba(255, 255, 255, 0.9);
+    background: #ffffff;
     border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
     border: 1px solid #e5e5ea;
-    position: relative;
-    /* We keep the card flat, but un-rotate the text so it's readable */
-  }
-
-  .room-content {
-    /* Un-rotate to face camera */
-    transform: rotateZ(45deg) rotateX(-60deg);
+    /* Billboard Effect: Reverses the scene rotation so the whole card perfectly faces the user */
+    transform: rotateZ(45deg) rotateX(-60deg) translateY(-20px) translateZ(10px);
+    transform-origin: bottom center;
+    padding: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 4px;
-    padding: 12px;
+    gap: 6px;
+  }
+
+  .room-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   .r-icon {
     color: var(--color-text-tertiary);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+  }
+  .r-icon svg {
+    width: 24px;
+    height: 24px;
   }
 
   .r-name {
-    font-size: 0.875rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-text-primary);
   }
 
   .r-source {
-    font-size: 0.65rem;
+    font-size: 0.875rem;
     font-weight: 600;
     color: var(--color-text-secondary);
   }
