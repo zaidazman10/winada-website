@@ -8,9 +8,9 @@
   </div>
   
   <div class="step-visual fade-in-up">
-    <div class="device-mockup hardware-panel">
-      <!-- Screen Notch -->
-      <div class="notch"></div>
+    <div class="tablet-mockup hardware-panel">
+      <!-- Camera Dot -->
+      <div class="camera-dot"></div>
       
       <!-- App Header -->
       <div class="app-header">
@@ -96,15 +96,17 @@
   .step-visual {
     display: flex;
     justify-content: center;
+    width: 100%;
   }
 
-  /* Device Mockup */
-  .device-mockup {
-    width: 320px;
-    height: 650px;
+  /* Tablet Mockup */
+  .tablet-mockup {
+    width: 100%;
+    max-width: 460px;
+    height: 580px;
     background: #ffffff;
-    border: 12px solid #f5f5f7;
-    border-radius: 48px;
+    border: 16px solid #f5f5f7;
+    border-radius: 24px;
     position: relative;
     box-shadow: 0 30px 60px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(0,0,0,0.05);
     display: flex;
@@ -112,16 +114,16 @@
     overflow: hidden;
   }
 
-  .notch {
+  /* Camera Dot */
+  .camera-dot {
     position: absolute;
     top: 0;
     left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 30px;
-    background: #f5f5f7;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
+    transform: translate(-50%, -10px);
+    width: 6px;
+    height: 6px;
+    background: #86868b;
+    border-radius: 50%;
     z-index: 10;
   }
 

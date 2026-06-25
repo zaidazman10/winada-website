@@ -11,38 +11,62 @@
     <div class="routing-diagram">
       <!-- The Hub -->
       <div class="hub-unit hardware-panel">
-        <div class="hub-label">Winada Hub</div>
+        <div class="hub-label">Winada Audio Matrix</div>
       </div>
       
       <!-- Lines -->
-    <div class="routing-lines">
-      <svg width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <path d="M50,0 C50,50 20,50 20,100" stroke="#d2d2d7" stroke-width="2" fill="none"/>
-        <path d="M50,0 C50,50 80,50 80,100" stroke="#d2d2d7" stroke-width="2" fill="none"/>
-      </svg>
-    </div>
+      <div class="routing-lines">
+        <svg width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path d="M50,0 C50,50 15,50 15,100" stroke="#d2d2d7" stroke-width="2" fill="none"/>
+          <path d="M50,0 C50,50 38,50 38,100" stroke="#d2d2d7" stroke-width="2" fill="none"/>
+          <path d="M50,0 C50,50 62,50 62,100" stroke="#d2d2d7" stroke-width="2" fill="none"/>
+          <path d="M50,0 C50,50 85,50 85,100" stroke="#d2d2d7" stroke-width="2" fill="none"/>
+        </svg>
+      </div>
 
       <!-- Rooms -->
       <div class="rooms-grid">
+        
         <div class="room-card hardware-panel">
           <div class="speaker-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle><line x1="12" y1="6" x2="12.01" y2="6"></line></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg>
           </div>
           <div class="room-info">
-            <span class="r-name">Living Room</span>
-            <span class="r-source text-blue">Spotify</span>
+            <span class="r-name">Lobby</span>
+            <span class="r-source text-blue">Ambient</span>
           </div>
         </div>
 
         <div class="room-card hardware-panel">
           <div class="speaker-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle><line x1="12" y1="6" x2="12.01" y2="6"></line></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg>
+          </div>
+          <div class="room-info">
+            <span class="r-name">Office</span>
+            <span class="r-source">Radio</span>
+          </div>
+        </div>
+
+        <div class="room-card hardware-panel">
+          <div class="speaker-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg>
           </div>
           <div class="room-info">
             <span class="r-name">Kitchen</span>
             <span class="r-source">Podcast</span>
           </div>
         </div>
+
+        <div class="room-card hardware-panel">
+          <div class="speaker-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg>
+          </div>
+          <div class="room-info">
+            <span class="r-name">Patio</span>
+            <span class="r-source text-blue">Spotify</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -143,15 +167,38 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    gap: 16px;
     z-index: 2;
+    flex-wrap: wrap;
   }
 
   .room-card {
-    width: 45%;
-    padding: 16px;
+    flex: 1 1 calc(25% - 16px);
+    min-width: 140px;
+    padding: 12px;
     display: flex;
     align-items: center;
     gap: 12px;
+  }
+
+  @media (max-width: 600px) {
+    .rooms-grid {
+      flex-direction: row;
+    }
+    .room-card {
+      flex: 1 1 calc(50% - 16px);
+    }
+  }
+
+  @media (max-width: 400px) {
+    .rooms-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+    .room-card {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   .speaker-icon {
