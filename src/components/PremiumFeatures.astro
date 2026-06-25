@@ -1,0 +1,109 @@
+---
+---
+
+<section class="features-section section">
+  <div class="container">
+    <div class="section-header text-center fade-in-up">
+      <h2>Everything You Need. <span class="text-gradient">Nothing You Don't.</span></h2>
+      <p>A smart system designed for everyday people, built with premium audio engineering.</p>
+    </div>
+
+    <div class="features-grid">
+      <!-- Feature 1 -->
+      <div class="feature-card glass-panel fade-in-up" style="animation-delay: 0.1s;">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20v-4"></path></svg>
+        </div>
+        <h3>Independent Control</h3>
+        <p>Play different music in every room, or group them together. Set volumes independently without affecting the rest of the house.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card glass-panel fade-in-up" style="animation-delay: 0.2s;">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <h3>Instant Sync</h3>
+        <p>No echo. No delay. When playing the same song across multiple rooms, the audio is perfectly synchronized in real-time.</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card glass-panel fade-in-up" style="animation-delay: 0.3s;">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        </div>
+        <h3>Any Speaker</h3>
+        <p>The controller connects to your existing amplifiers and speakers. Transform your current setup into a smart, multizone system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-header {
+    margin-bottom: 60px;
+  }
+  
+  .section-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 16px;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-accent-cyan) 0%, var(--color-accent-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .section-header p {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .feature-card {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform var(--transition-smooth), border-color var(--transition-smooth);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .feature-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .feature-card h3 {
+    font-size: 1.25rem;
+    margin-top: 8px;
+  }
+
+  .feature-card p {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+</style>

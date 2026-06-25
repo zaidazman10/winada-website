@@ -1,136 +1,100 @@
 ---
-// BrandHeader - Floating glass navigation bar
 ---
 
-<header class="brand-header">
-  <div class="container">
-    <div class="navbar-glass">
-      <a href="/" class="brand-logo">
-        <!-- Fluid bezier soundwave gradient logo mark -->
-        <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
-          <defs>
-            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="var(--color-accent-cyan)" />
-              <stop offset="100%" stop-color="var(--color-accent-pink)" />
-            </linearGradient>
-          </defs>
-          <path 
-            d="M 6 18 C 10 5, 14 35, 18 20 C 22 5, 26 35, 34 18" 
-            stroke="url(#logo-grad)" 
-            stroke-width="3.5" 
-            stroke-linecap="round" 
-            stroke-linejoin="round"
-          />
-        </svg>
-        <span class="brand-name">winada <span class="brand-product">controller</span></span>
-      </a>
+<header class="header">
+  <div class="container header-inner">
+    <a href="/winada-website/" class="brand">
+      <div class="brand-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-9 5 18 3-9h5"></path></svg>
+      </div>
+      <span class="brand-name">WINADA</span>
+    </a>
 
-      <nav class="nav-links">
-        <a href="#" class="nav-link">overview</a>
-        <a href="#datasheet" class="nav-link">features</a>
-        <a href="#contact" class="nav-link">contact</a>
-      </nav>
-
-      <a href="#contact" class="nav-cta">Get Started</a>
-    </div>
+    <nav class="nav-links">
+      <a href="#concept">How it Works</a>
+      <a href="#contact" class="btn-primary btn-small">Get Started</a>
+    </nav>
   </div>
 </header>
 
 <style>
-  .brand-header {
+  .header {
     position: fixed;
-    top: 24px;
+    top: 0;
     left: 0;
-    right: 0;
+    width: 100%;
     z-index: 100;
-  }
-
-  @media (max-width: 600px) {
-    .brand-header {
-      top: 12px;
-    }
-  }
-
-  .navbar-glass {
-    background: rgba(9, 10, 15, 0.4);
+    background: rgba(3, 3, 5, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--color-border);
-    padding: 10px 24px;
-    border-radius: 12px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    height: 80px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--color-text-primary);
   }
 
   .brand-logo {
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: var(--color-text);
+    justify-content: center;
+    background: var(--color-text-primary);
+    color: var(--color-bg-base);
+    border-radius: 8px;
   }
 
-  .logo-mark {
-    width: 28px;
-    height: 28px;
+  .brand-logo svg {
+    width: 18px;
+    height: 18px;
   }
 
   .brand-name {
-    font-family: var(--font-heading);
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    letter-spacing: -0.03em;
-    text-transform: lowercase;
-  }
-
-  .brand-product {
-    font-weight: 300;
-    color: var(--color-text-muted);
-    font-size: 0.85rem;
-    margin-left: 1px;
+    letter-spacing: 0.1em;
   }
 
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 32px;
   }
 
-  .nav-link {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
+  .nav-links a:not(.btn-primary) {
+    color: var(--color-text-secondary);
     text-decoration: none;
+    font-size: 0.95rem;
     font-weight: 500;
-    transition: color var(--transition-smooth);
-    text-transform: capitalize;
+    transition: color var(--transition-snappy);
   }
 
-  .nav-link:hover {
-    color: var(--color-text);
+  .nav-links a:not(.btn-primary):hover {
+    color: var(--color-text-primary);
   }
 
-  .nav-cta {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--color-text);
-    border: 1px solid var(--color-border-strong);
-    padding: 8px 16px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: all var(--transition-smooth);
+  .btn-small {
+    padding: 8px 20px;
+    font-size: 0.875rem;
   }
 
-  .nav-cta:hover {
-    background: #ffffff;
-    color: #090a0f;
-    box-shadow: 0 0 16px rgba(255, 255, 255, 0.15);
-  }
-
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     .nav-links {
+      gap: 16px;
+    }
+    .nav-links a:not(.btn-primary) {
       display: none;
     }
   }
