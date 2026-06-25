@@ -9,64 +9,94 @@
   
   <div class="step-visual fade-in-up">
     
-    <div class="iso-wrapper">
-      <div class="iso-scene">
-        
-        <!-- The Core: Audio Matrix -->
-        <div class="iso-layer iso-base">
-          <div class="base-surface">
-            <span class="base-logo">WINADA CORE</span>
-            <div class="base-ports">
-              <div class="b-port"></div><div class="b-port"></div><div class="b-port"></div><div class="b-port active"></div>
-            </div>
+    <div class="data-flow-scene">
+      <!-- Left: The Matrix Hardware -->
+      <div class="df-matrix hardware-panel">
+        <div class="df-matrix-header">
+          <span class="df-logo">WINADA CORE</span>
+          <div class="df-status">STATUS: ONLINE</div>
+        </div>
+        <div class="df-ports">
+          <div class="df-port-group">
+            <div class="df-port active" style="--port-color: #34c759;"></div>
+            <div class="df-port-label">Z1</div>
+          </div>
+          <div class="df-port-group">
+            <div class="df-port active" style="--port-color: #007aff;"></div>
+            <div class="df-port-label">Z2</div>
+          </div>
+          <div class="df-port-group">
+            <div class="df-port active" style="--port-color: #ff9500;"></div>
+            <div class="df-port-label">Z3</div>
+          </div>
+          <div class="df-port-group">
+            <div class="df-port active" style="--port-color: #af52de;"></div>
+            <div class="df-port-label">Z4</div>
           </div>
         </div>
+      </div>
 
-        <!-- Vertical Data Beams -->
-        <div class="iso-beams">
-          <div class="beam beam-1"></div>
-          <div class="beam beam-2"></div>
-        </div>
-
-        <!-- Layer 1: Ground Floor -->
-        <div class="iso-layer iso-floor iso-floor-1">
-          <div class="floor-label">Ground Floor</div>
+      <!-- Center: SVG Animated Cables -->
+      <div class="df-cables">
+        <svg width="100%" height="100%" viewBox="0 0 100 400" preserveAspectRatio="none">
+          <!-- Cable 1 (Green) -->
+          <path d="M 0,50 C 50,50 50,50 100,50" class="cable-track" />
+          <path d="M 0,50 C 50,50 50,50 100,50" class="cable-pulse" style="stroke: #34c759; animation-delay: 0s;" />
           
-          <div class="iso-room">
-            <div class="room-content">
-              <span class="r-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg></span>
-              <span class="r-name">Lobby</span>
-              <span class="r-source text-blue">Ambient</span>
-            </div>
-          </div>
+          <!-- Cable 2 (Blue) -->
+          <path d="M 0,150 C 50,150 50,150 100,150" class="cable-track" />
+          <path d="M 0,150 C 50,150 50,150 100,150" class="cable-pulse" style="stroke: #007aff; animation-delay: 0.5s;" />
 
-          <div class="iso-room">
-            <div class="room-content">
-              <span class="r-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg></span>
-              <span class="r-name">Patio</span>
-              <span class="r-source text-blue">Spotify</span>
-            </div>
+          <!-- Cable 3 (Orange) -->
+          <path d="M 0,250 C 50,250 50,250 100,250" class="cable-track" />
+          <path d="M 0,250 C 50,250 50,250 100,250" class="cable-pulse" style="stroke: #ff9500; animation-delay: 1s;" />
+
+          <!-- Cable 4 (Purple) -->
+          <path d="M 0,350 C 50,350 50,350 100,350" class="cable-track" />
+          <path d="M 0,350 C 50,350 50,350 100,350" class="cable-pulse" style="stroke: #af52de; animation-delay: 1.5s;" />
+        </svg>
+      </div>
+
+      <!-- Right: Room Zones -->
+      <div class="df-zones">
+        
+        <div class="df-room hardware-panel">
+          <div class="df-room-icon" style="color: #34c759;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg>
+          </div>
+          <div class="df-room-details">
+            <span class="df-room-name">Lobby</span>
+            <span class="df-room-source">Ambient</span>
           </div>
         </div>
 
-        <!-- Layer 2: First Floor -->
-        <div class="iso-layer iso-floor iso-floor-2">
-          <div class="floor-label">First Floor</div>
-
-          <div class="iso-room">
-            <div class="room-content">
-              <span class="r-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg></span>
-              <span class="r-name">Office</span>
-              <span class="r-source">Radio</span>
-            </div>
+        <div class="df-room hardware-panel">
+          <div class="df-room-icon" style="color: #007aff;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg>
           </div>
+          <div class="df-room-details">
+            <span class="df-room-name">Patio</span>
+            <span class="df-room-source">Spotify</span>
+          </div>
+        </div>
 
-          <div class="iso-room">
-            <div class="room-content">
-              <span class="r-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg></span>
-              <span class="r-name">Kitchen</span>
-              <span class="r-source">Podcast</span>
-            </div>
+        <div class="df-room hardware-panel">
+          <div class="df-room-icon" style="color: #ff9500;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg>
+          </div>
+          <div class="df-room-details">
+            <span class="df-room-name">Office</span>
+            <span class="df-room-source">Radio</span>
+          </div>
+        </div>
+
+        <div class="df-room hardware-panel">
+          <div class="df-room-icon" style="color: #af52de;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg>
+          </div>
+          <div class="df-room-details">
+            <span class="df-room-name">Kitchen</span>
+            <span class="df-room-source">Podcast</span>
           </div>
         </div>
 
@@ -128,231 +158,205 @@
     line-height: 1.5;
   }
 
-  .step-visual {
+  /* Animated Data-Flow Schematic */
+  .data-flow-scene {
     display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-
-  /* 3D Isometric Architecture Diagram */
-  .iso-wrapper {
-    perspective: 1200px;
+    align-items: stretch;
     width: 100%;
     max-width: 500px;
-    height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    gap: 16px;
     position: relative;
-    /* Scale down seamlessly on tiny screens */
-    transform: scale(1);
+    margin: 0 auto;
   }
 
-  @media (max-width: 500px) {
-    .iso-wrapper {
-      transform: scale(0.8);
-      height: 400px;
-    }
-  }
-  @media (max-width: 400px) {
-    .iso-wrapper {
-      transform: scale(0.65);
-      height: 350px;
+  @media (max-width: 600px) {
+    .data-flow-scene {
+      flex-direction: column;
+      align-items: center;
     }
   }
 
-  .iso-scene {
-    width: 280px;
-    height: 280px;
-    position: relative;
-    transform-style: preserve-3d;
-    transform: rotateX(60deg) rotateZ(-45deg);
-  }
-
-  .iso-layer {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    border-radius: 16px;
-    transform-style: preserve-3d;
-  }
-
-  /* The Matrix Hardware (Z=0) */
-  .iso-base {
+  /* Matrix Hardware */
+  .df-matrix {
+    flex: 0 0 160px;
     background: #1d1d1f;
-    transform: translateZ(0);
-    box-shadow: 20px 20px 60px rgba(0,0,0,0.2);
-  }
-  /* 3D Box Sides */
-  .iso-base::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 24px;
-    background: #333336;
-    bottom: -24px;
-    left: 0;
-    transform-origin: top;
-    transform: rotateX(-90deg);
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-  }
-  .iso-base::after {
-    content: '';
-    position: absolute;
-    width: 24px;
-    height: 100%;
-    background: #000000;
-    top: 0;
-    right: -24px;
-    transform-origin: left;
-    transform: rotateY(90deg);
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-  }
-
-  .base-surface {
-    position: absolute;
-    inset: 12px;
-    border: 1px solid #333;
-    border-radius: 8px;
+    border-radius: 16px;
+    padding: 24px 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    color: #ffffff;
+    z-index: 2;
   }
 
-  .base-logo {
-    color: #86868b;
-    font-size: 0.875rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    transform: rotateZ(45deg) rotateX(-60deg);
-    transform-origin: top left;
+  @media (max-width: 600px) {
+    .df-matrix {
+      flex: none;
+      width: 100%;
+      height: 120px;
+      flex-direction: row;
+      align-items: center;
+      padding: 16px 24px;
+    }
   }
 
-  .base-ports {
+  .df-matrix-header {
     display: flex;
-    gap: 8px;
-    align-self: flex-end;
+    flex-direction: column;
+    gap: 4px;
   }
 
-  .b-port {
-    width: 12px;
-    height: 12px;
+  .df-logo {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .df-status {
+    font-size: 0.65rem;
+    color: #34c759;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  .df-ports {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 600px) {
+    .df-ports {
+      flex-direction: row;
+      margin-top: 0;
+    }
+  }
+
+  .df-port-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  @media (max-width: 600px) {
+    .df-port-group {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+
+  .df-port {
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: #333;
     border: 2px solid #555;
-  }
-  .b-port.active {
-    background: #34c759;
-    box-shadow: 0 0 8px #34c759;
+    position: relative;
   }
 
-  /* The Glass Floors */
-  .iso-floor {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.9);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    padding: 24px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  .df-port.active {
+    background: var(--port-color);
+    border-color: var(--port-color);
+    box-shadow: 0 0 12px var(--port-color);
   }
 
-  .iso-floor-1 {
-    transform: translateZ(120px);
-  }
-  .iso-floor-2 {
-    transform: translateZ(240px);
-  }
-
-  .floor-label {
-    position: absolute;
-    bottom: -32px;
-    left: 0;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-text-secondary);
-    transform: rotateZ(45deg) rotateX(-60deg);
-    transform-origin: bottom left;
+  .df-port-label {
+    font-size: 0.75rem;
+    color: #86868b;
+    font-weight: 600;
   }
 
-  /* Connecting Beams */
-  .iso-beams {
-    position: absolute;
-    inset: 0;
-    transform-style: preserve-3d;
+  /* SVG Cables */
+  .df-cables {
+    flex: 1;
+    min-width: 60px;
+    position: relative;
   }
 
-  .beam {
-    position: absolute;
-    width: 4px;
-    height: 240px; /* reaches floor 2 */
-    background: var(--color-accent-blue);
-    transform-origin: bottom;
-    box-shadow: 0 0 12px var(--color-accent-blue);
+  @media (max-width: 600px) {
+    .df-cables {
+      width: 100%;
+      height: 60px;
+      transform: rotate(90deg);
+      margin: 20px 0;
+    }
   }
 
-  .beam-1 {
-    bottom: 50%;
-    left: 40%;
-    transform: rotateX(90deg); /* points straight up in 3D space */
-  }
-  .beam-2 {
-    bottom: 30%;
-    left: 70%;
-    transform: rotateX(90deg);
-    height: 120px; /* only reaches floor 1 */
+  .cable-track {
+    fill: none;
+    stroke: var(--color-border);
+    stroke-width: 4px;
+    stroke-dasharray: 8 8;
   }
 
-  /* Room Cards (Billboards facing the camera) */
-  .iso-room {
+  .cable-pulse {
+    fill: none;
+    stroke-width: 6px;
+    stroke-linecap: round;
+    stroke-dasharray: 20 200;
+    animation: flowPulse 2s linear infinite;
+  }
+
+  @keyframes flowPulse {
+    0% { stroke-dashoffset: 220; }
+    100% { stroke-dashoffset: 0; }
+  }
+
+  /* Zones */
+  .df-zones {
+    flex: 0 0 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    z-index: 2;
+  }
+
+  @media (max-width: 600px) {
+    .df-zones {
+      flex: none;
+      width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  .df-room {
     background: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-    border: 1px solid #e5e5ea;
-    /* Billboard Effect: Reverses the scene rotation so the whole card perfectly faces the user */
-    transform: rotateZ(45deg) rotateX(-60deg) translateY(-20px) translateZ(10px);
-    transform-origin: bottom center;
     padding: 16px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
-    gap: 6px;
+    gap: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    border: 1px solid #e5e5ea;
+    height: 80px;
   }
 
-  .room-content {
+  @media (max-width: 600px) {
+    .df-room {
+      flex: 1 1 calc(50% - 16px);
+      min-width: 140px;
+    }
+  }
+
+  .df-room-details {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    gap: 4px;
   }
 
-  .r-icon {
-    color: var(--color-text-tertiary);
-    margin-bottom: 6px;
-  }
-  .r-icon svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .r-name {
-    font-size: 1.25rem;
+  .df-room-name {
+    font-size: 1.125rem;
     font-weight: 700;
     color: var(--color-text-primary);
   }
 
-  .r-source {
+  .df-room-source {
     font-size: 0.875rem;
     font-weight: 600;
     color: var(--color-text-secondary);
-  }
-
-  .text-blue {
-    color: var(--color-accent-blue);
   }
 </style>
