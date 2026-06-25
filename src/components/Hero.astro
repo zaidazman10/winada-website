@@ -1,74 +1,64 @@
 ---
 ---
 
-<section class="hero-section container">
-  <div class="hero-content fade-in-up">
-    <div class="badge">The Smart Audio Switchboard</div>
+<section class="hero-section">
+  <div class="container hero-content fade-in-up">
     <h1 class="hero-title">
-      One Controller.<br/>
-      <span class="text-gradient">Total Command.</span>
+      The brain of<br/>your audio.
     </h1>
     <p class="hero-subtitle">
-      The central hub for your entire multi-room music system. Route any audio source to any room instantly, with absolute clarity and independent volume control.
+      Winada is the central hardware controller that effortlessly routes all your music to any room in your home or business.
     </p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Get Your Controller</a>
-      <a href="#concept" class="btn-secondary">See How It Works</a>
+      <a href="#contact" class="btn-primary">Buy Now</a>
+      <a href="#concept" class="btn-secondary">Learn more &gt;</a>
+    </div>
+    
+    <!-- Hero Hardware Mockup -->
+    <div class="hero-hardware fade-in-up" style="animation-delay: 0.3s;">
+      <div class="hardware-unit">
+        <div class="unit-top"></div>
+        <div class="unit-front">
+          <div class="unit-logo">WINADA</div>
+          <div class="unit-indicator"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
   .hero-section {
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding-top: 160px;
+    padding-bottom: 80px;
     text-align: center;
-    padding-top: 100px;
+    background: var(--color-bg-base);
+    overflow: hidden;
   }
 
   .hero-content {
-    max-width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
-  }
-
-  .badge {
-    background: rgba(0, 240, 255, 0.1);
-    color: var(--color-accent-cyan);
-    border: 1px solid rgba(0, 240, 255, 0.2);
-    padding: 6px 16px;
-    border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.05);
   }
 
   .hero-title {
-    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    font-size: clamp(4rem, 10vw, 6rem);
     line-height: 1.05;
     font-weight: 700;
     letter-spacing: -0.04em;
-  }
-
-  .text-gradient {
-    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-text-tertiary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    margin-bottom: 24px;
+    color: var(--color-text-primary);
   }
 
   .hero-subtitle {
-    font-size: clamp(1.125rem, 3vw, 1.375rem);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
     color: var(--color-text-secondary);
-    max-width: 600px;
-    line-height: 1.6;
-    margin-bottom: 16px;
+    max-width: 700px;
+    line-height: 1.3;
+    margin-bottom: 32px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
   }
 
   .hero-actions {
@@ -76,5 +66,80 @@
     gap: 16px;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 80px;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-accent-blue);
+    padding: 12px 0;
+  }
+  .btn-secondary:hover {
+    background: transparent;
+    text-decoration: underline;
+  }
+
+  /* Abstract Hardware Mockup */
+  .hero-hardware {
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    perspective: 1000px;
+  }
+
+  .hardware-unit {
+    width: 100%;
+    height: 120px;
+    position: relative;
+    transform: rotateX(15deg);
+    transform-style: preserve-3d;
+  }
+
+  .unit-top {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(180deg, #f5f5f7 0%, #e8e8ed 100%);
+    border-radius: 12px 12px 0 0;
+    transform-origin: bottom;
+    transform: rotateX(70deg);
+    border: 1px solid #d2d2d7;
+    border-bottom: none;
+  }
+
+  .unit-front {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: #e5e5ea;
+    border-radius: 0 0 12px 12px;
+    border: 1px solid #d2d2d7;
+    border-top: 1px solid #ffffff;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .unit-logo {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #86868b;
+  }
+
+  .unit-indicator {
+    position: absolute;
+    right: 32px;
+    width: 6px;
+    height: 6px;
+    background: #34c759;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #34c759;
   }
 </style>
