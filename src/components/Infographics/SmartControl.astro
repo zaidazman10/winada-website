@@ -8,55 +8,76 @@
   </div>
   
   <div class="step-visual fade-in-up">
-    <div class="tablet-mockup hardware-panel">
+    <div class="tablet-mockup">
       <!-- Camera Dot -->
       <div class="camera-dot"></div>
       
-      <!-- App Header -->
-      <div class="app-header">
-        <span class="app-title">Home Audio</span>
-      </div>
-
-      <!-- App Body -->
-      <div class="app-body">
-        <div class="now-playing">
-          <div class="album-art"></div>
-          <div class="track-info">
-            <h4>Midnight City</h4>
-            <p>Spotify Connect</p>
-          </div>
+      <div class="tablet-screen">
+        <!-- App Header -->
+        <div class="app-header">
+          <span class="app-greeting">Good Afternoon,</span>
+          <span class="app-title">Home Audio</span>
         </div>
 
-        <div class="room-list">
-          <div class="room-control">
-            <div class="rc-header">
-              <span class="rc-name">Living Room</span>
-              <span class="rc-vol">75%</span>
+        <!-- App Body -->
+        <div class="app-body">
+          
+          <!-- Now Playing Glass Card -->
+          <div class="now-playing glass-card">
+            <div class="album-art glow-shadow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
             </div>
-            <div class="apple-slider">
-              <div class="slider-fill" style="width: 75%"></div>
+            <div class="track-info">
+              <h4>Midnight City</h4>
+              <p>M83 • Spotify Connect</p>
             </div>
-          </div>
-
-          <div class="room-control">
-            <div class="rc-header">
-              <span class="rc-name">Kitchen</span>
-              <span class="rc-vol">40%</span>
-            </div>
-            <div class="apple-slider">
-              <div class="slider-fill" style="width: 40%"></div>
+            <div class="eq-visualizer">
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
             </div>
           </div>
 
-          <div class="room-control disabled">
-            <div class="rc-header">
-              <span class="rc-name">Patio</span>
-              <span class="rc-vol">Off</span>
+          <!-- Quick Controls -->
+          <div class="quick-controls">
+            <div class="control-btn glass-card active"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
+            <div class="control-btn glass-card"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg></div>
+            <div class="control-btn glass-card"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg></div>
+          </div>
+
+          <!-- Room Sliders -->
+          <div class="room-list">
+            <div class="room-control">
+              <div class="rc-header">
+                <span class="rc-name">Living Room</span>
+                <span class="rc-vol">Playing</span>
+              </div>
+              <div class="apple-slider glass-card">
+                <div class="slider-fill gradient-1 animate-slider-1"></div>
+              </div>
             </div>
-            <div class="apple-slider">
-              <div class="slider-fill" style="width: 0%"></div>
+
+            <div class="room-control">
+              <div class="rc-header">
+                <span class="rc-name">Kitchen</span>
+                <span class="rc-vol">Playing</span>
+              </div>
+              <div class="apple-slider glass-card">
+                <div class="slider-fill gradient-2 animate-slider-2"></div>
+              </div>
+            </div>
+
+            <div class="room-control disabled">
+              <div class="rc-header">
+                <span class="rc-name">Patio</span>
+                <span class="rc-vol">Off</span>
+              </div>
+              <div class="apple-slider glass-card">
+                <div class="slider-fill" style="width: 0%"></div>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -99,82 +120,211 @@
     width: 100%;
   }
 
-  /* Tablet Mockup */
+  /* Tablet Mockup Hardware */
   .tablet-mockup {
     width: 100%;
-    max-width: 460px;
+    max-width: 440px;
     height: 580px;
-    background: #ffffff;
-    border: 16px solid #f5f5f7;
-    border-radius: 24px;
+    background: #000;
+    border: 12px solid #1c1c1e;
+    border-radius: 32px;
     position: relative;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(0,0,0,0.05);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.2), inset 0 0 0 2px rgba(255,255,255,0.1);
+    overflow: hidden;
+  }
+
+  /* Screen Background Gradient */
+  .tablet-screen {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    position: relative;
     display: flex;
     flex-direction: column;
     overflow: hidden;
   }
+  
+  /* Decorative animated blobs inside screen */
+  .tablet-screen::before, .tablet-screen::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: 0;
+    opacity: 0.6;
+    animation: blobFloat 10s ease-in-out infinite alternate;
+  }
+  .tablet-screen::before {
+    top: -50px;
+    left: -100px;
+    background: rgba(255, 107, 107, 0.4);
+  }
+  .tablet-screen::after {
+    bottom: -100px;
+    right: -50px;
+    background: rgba(74, 144, 226, 0.4);
+    animation-delay: -5s;
+  }
 
-  /* Camera Dot */
+  @keyframes blobFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 30px) scale(1.1); }
+  }
+
   .camera-dot {
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -10px);
-    width: 6px;
-    height: 6px;
-    background: #86868b;
+    top: 50%;
+    left: -6px;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: #444;
     border-radius: 50%;
     z-index: 10;
   }
+  @media (max-width: 600px) {
+    .camera-dot {
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Glassmorphism Utilities */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  }
+
+  /* App Layout */
+  .app-header, .app-body {
+    position: relative;
+    z-index: 1;
+  }
 
   .app-header {
-    padding: 60px 24px 20px;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 40px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .app-greeting {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(0,0,0,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .app-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #1d1d1f;
   }
 
   .app-body {
-    padding: 24px;
+    padding: 0 24px 24px;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 24px;
   }
 
+  /* Now Playing Card */
   .now-playing {
     display: flex;
     align-items: center;
     gap: 16px;
-    background: #f5f5f7;
     padding: 16px;
-    border-radius: 16px;
+    border-radius: 20px;
   }
 
   .album-art {
-    width: 48px;
-    height: 48px;
-    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
-    border-radius: 8px;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .glow-shadow {
+    box-shadow: 0 8px 20px rgba(255, 154, 158, 0.4);
+  }
+
+  .track-info {
+    flex: 1;
   }
 
   .track-info h4 {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1d1d1f;
+    margin-bottom: 2px;
   }
 
   .track-info p {
     font-size: 0.875rem;
-    color: var(--color-text-secondary);
+    color: rgba(0,0,0,0.6);
+    font-weight: 500;
   }
 
+  /* Animating EQ */
+  .eq-visualizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 20px;
+    padding-right: 8px;
+  }
+  .eq-bar {
+    width: 4px;
+    background: #1d1d1f;
+    border-radius: 2px;
+    animation: eqBounce 0.5s ease-in-out infinite alternate;
+  }
+  .eq-bar:nth-child(1) { height: 10px; animation-delay: 0.1s; }
+  .eq-bar:nth-child(2) { height: 20px; animation-delay: 0.3s; }
+  .eq-bar:nth-child(3) { height: 14px; animation-delay: 0.2s; }
+
+  @keyframes eqBounce {
+    0% { transform: scaleY(0.3); }
+    100% { transform: scaleY(1); }
+  }
+
+  /* Quick Controls */
+  .quick-controls {
+    display: flex;
+    gap: 16px;
+  }
+
+  .control-btn {
+    flex: 1;
+    height: 48px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1d1d1f;
+  }
+  .control-btn.active {
+    background: #1d1d1f;
+    color: #ffffff;
+    border-color: #1d1d1f;
+  }
+
+  /* Room Sliders */
   .room-list {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
   }
 
   .room-control {
@@ -184,31 +334,55 @@
   }
 
   .room-control.disabled {
-    opacity: 0.4;
+    opacity: 0.5;
   }
 
   .rc-header {
     display: flex;
     justify-content: space-between;
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1d1d1f;
   }
 
   .rc-vol {
-    color: var(--color-text-secondary);
+    color: rgba(0,0,0,0.5);
+    font-size: 0.875rem;
   }
 
   .apple-slider {
     width: 100%;
-    height: 32px;
-    background: #f5f5f7;
-    border-radius: 16px;
+    height: 44px;
+    border-radius: 22px;
     overflow: hidden;
+    position: relative;
   }
 
   .slider-fill {
     height: 100%;
-    background: var(--color-accent-blue);
-    border-radius: 16px;
+    border-radius: 22px;
+  }
+  
+  .gradient-1 {
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  }
+  .gradient-2 {
+    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+  }
+
+  .animate-slider-1 {
+    animation: slideUp 4s ease-in-out infinite alternate;
+  }
+  .animate-slider-2 {
+    animation: slideUp2 5s ease-in-out infinite alternate;
+  }
+
+  @keyframes slideUp {
+    0% { width: 40%; }
+    100% { width: 85%; }
+  }
+  @keyframes slideUp2 {
+    0% { width: 30%; }
+    100% { width: 60%; }
   }
 </style>
