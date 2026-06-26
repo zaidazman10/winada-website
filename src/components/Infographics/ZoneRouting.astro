@@ -9,98 +9,76 @@
   
   <div class="step-visual fade-in-up">
     
-    <div class="data-flow-scene">
-      <!-- Left: The Matrix Hardware -->
-      <div class="df-matrix hardware-panel">
-        <div class="df-matrix-header">
-          <span class="df-logo">WINADA CORE</span>
-          <div class="df-status">STATUS: ONLINE</div>
-        </div>
-        <div class="df-ports">
-          <div class="df-port-group">
-            <div class="df-port active" style="--port-color: #34c759;"></div>
-            <div class="df-port-label">Z1</div>
-          </div>
-          <div class="df-port-group">
-            <div class="df-port active" style="--port-color: #007aff;"></div>
-            <div class="df-port-label">Z2</div>
-          </div>
-          <div class="df-port-group">
-            <div class="df-port active" style="--port-color: #ff9500;"></div>
-            <div class="df-port-label">Z3</div>
-          </div>
-          <div class="df-port-group">
-            <div class="df-port active" style="--port-color: #af52de;"></div>
-            <div class="df-port-label">Z4</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Center: SVG Animated Cables -->
-      <div class="df-cables">
-        <svg width="100%" height="100%" viewBox="0 0 100 400" preserveAspectRatio="none">
-          <!-- Cable 1 (Green) -->
-          <path d="M 0,50 C 50,50 50,50 100,50" class="cable-track" />
-          <path d="M 0,50 C 50,50 50,50 100,50" class="cable-pulse" style="stroke: #34c759; animation-delay: 0s;" />
-          
-          <!-- Cable 2 (Blue) -->
-          <path d="M 0,150 C 50,150 50,150 100,150" class="cable-track" />
-          <path d="M 0,150 C 50,150 50,150 100,150" class="cable-pulse" style="stroke: #007aff; animation-delay: 0.5s;" />
-
-          <!-- Cable 3 (Orange) -->
-          <path d="M 0,250 C 50,250 50,250 100,250" class="cable-track" />
-          <path d="M 0,250 C 50,250 50,250 100,250" class="cable-pulse" style="stroke: #ff9500; animation-delay: 1s;" />
-
-          <!-- Cable 4 (Purple) -->
-          <path d="M 0,350 C 50,350 50,350 100,350" class="cable-track" />
-          <path d="M 0,350 C 50,350 50,350 100,350" class="cable-pulse" style="stroke: #af52de; animation-delay: 1.5s;" />
-        </svg>
-      </div>
-
-      <!-- Right: Room Zones -->
-      <div class="df-zones">
+    <div class="blueprint-wrapper hardware-panel">
+      <!-- SVG Wiring Layer -->
+      <svg class="bp-wiring" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <!-- Top Left (Lobby) -->
+        <path d="M 50 50 L 25 50 L 25 25" class="bp-wire" stroke="#34c759" opacity="0.3"/>
+        <path d="M 50 50 L 25 50 L 25 25" class="bp-wire-pulse" stroke="#34c759"/>
         
-        <div class="df-room hardware-panel">
-          <div class="df-room-icon" style="color: #34c759;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg>
+        <!-- Top Right (Patio) -->
+        <path d="M 50 50 L 75 50 L 75 25" class="bp-wire" stroke="#007aff" opacity="0.3"/>
+        <path d="M 50 50 L 75 50 L 75 25" class="bp-wire-pulse" stroke="#007aff"/>
+        
+        <!-- Bottom Left (Office) -->
+        <path d="M 50 50 L 25 50 L 25 75" class="bp-wire" stroke="#ff9500" opacity="0.3"/>
+        <path d="M 50 50 L 25 50 L 25 75" class="bp-wire-pulse" stroke="#ff9500"/>
+        
+        <!-- Bottom Right (Kitchen) -->
+        <path d="M 50 50 L 75 50 L 75 75" class="bp-wire" stroke="#af52de" opacity="0.3"/>
+        <path d="M 50 50 L 75 50 L 75 75" class="bp-wire-pulse" stroke="#af52de"/>
+      </svg>
+
+      <!-- The Blueprint Grid -->
+      <div class="blueprint-grid">
+        <!-- Top Left -->
+        <div class="bp-room">
+          <div class="bp-room-header">
+            <span class="bp-r-name">Lobby</span>
+            <span class="bp-r-source" style="color: #34c759;">Ambient</span>
           </div>
-          <div class="df-room-details">
-            <span class="df-room-name">Lobby</span>
-            <span class="df-room-source">Ambient</span>
+          <div class="bp-r-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg></div>
+        </div>
+
+        <!-- Top Right -->
+        <div class="bp-room">
+          <div class="bp-room-header" style="align-items: flex-end; text-align: right;">
+            <span class="bp-r-name">Patio</span>
+            <span class="bp-r-source" style="color: #007aff;">Spotify</span>
+          </div>
+          <div class="bp-r-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg></div>
+        </div>
+
+        <!-- Bottom Left -->
+        <div class="bp-room" style="justify-content: flex-end;">
+          <div class="bp-r-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg></div>
+          <div class="bp-room-header" style="margin-top: auto;">
+            <span class="bp-r-name">Office</span>
+            <span class="bp-r-source" style="color: #ff9500;">Radio</span>
           </div>
         </div>
 
-        <div class="df-room hardware-panel">
-          <div class="df-room-icon" style="color: #007aff;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg>
-          </div>
-          <div class="df-room-details">
-            <span class="df-room-name">Patio</span>
-            <span class="df-room-source">Spotify</span>
-          </div>
-        </div>
-
-        <div class="df-room hardware-panel">
-          <div class="df-room-icon" style="color: #ff9500;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg>
-          </div>
-          <div class="df-room-details">
-            <span class="df-room-name">Office</span>
-            <span class="df-room-source">Radio</span>
+        <!-- Bottom Right -->
+        <div class="bp-room" style="justify-content: flex-end; align-items: flex-end;">
+          <div class="bp-r-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg></div>
+          <div class="bp-room-header" style="margin-top: auto; align-items: flex-end; text-align: right;">
+            <span class="bp-r-name">Kitchen</span>
+            <span class="bp-r-source" style="color: #af52de;">Podcast</span>
           </div>
         </div>
-
-        <div class="df-room hardware-panel">
-          <div class="df-room-icon" style="color: #af52de;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><circle cx="12" cy="14" r="4"></circle></svg>
-          </div>
-          <div class="df-room-details">
-            <span class="df-room-name">Kitchen</span>
-            <span class="df-room-source">Podcast</span>
-          </div>
-        </div>
-
       </div>
+
+      <!-- The Central Matrix Core -->
+      <div class="bp-matrix">
+        <span class="m-logo">WINADA CORE</span>
+        <div class="m-ports">
+          <div class="m-port" style="background: #34c759; box-shadow: 0 0 8px #34c759;"></div>
+          <div class="m-port" style="background: #007aff; box-shadow: 0 0 8px #007aff;"></div>
+          <div class="m-port" style="background: #ff9500; box-shadow: 0 0 8px #ff9500;"></div>
+          <div class="m-port" style="background: #af52de; box-shadow: 0 0 8px #af52de;"></div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -158,205 +136,164 @@
     line-height: 1.5;
   }
 
-  /* Animated Data-Flow Schematic */
-  .data-flow-scene {
+  .step-visual {
     display: flex;
-    align-items: stretch;
+    justify-content: center;
     width: 100%;
-    max-width: 500px;
-    gap: 16px;
+  }
+
+  /* Architectural Blueprint Visual */
+  .blueprint-wrapper {
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 1 / 1;
+    background-color: #fbfbfd;
+    background-image: 
+      linear-gradient(rgba(0, 122, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 122, 255, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    border-radius: 24px;
+    border: 1px solid var(--color-border);
     position: relative;
-    margin: 0 auto;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
   }
 
-  @media (max-width: 600px) {
-    .data-flow-scene {
-      flex-direction: column;
-      align-items: center;
-    }
+  .bp-wiring {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
   }
 
-  /* Matrix Hardware */
-  .df-matrix {
-    flex: 0 0 160px;
-    background: #1d1d1f;
-    border-radius: 16px;
-    padding: 24px 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    color: #ffffff;
-    z-index: 2;
-  }
-
-  @media (max-width: 600px) {
-    .df-matrix {
-      flex: none;
-      width: 100%;
-      height: 120px;
-      flex-direction: row;
-      align-items: center;
-      padding: 16px 24px;
-    }
-  }
-
-  .df-matrix-header {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .df-logo {
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-  }
-
-  .df-status {
-    font-size: 0.65rem;
-    color: #34c759;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-  }
-
-  .df-ports {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin-top: 40px;
-  }
-
-  @media (max-width: 600px) {
-    .df-ports {
-      flex-direction: row;
-      margin-top: 0;
-    }
-  }
-
-  .df-port-group {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  @media (max-width: 600px) {
-    .df-port-group {
-      flex-direction: column;
-      gap: 8px;
-    }
-  }
-
-  .df-port {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: #333;
-    border: 2px solid #555;
-    position: relative;
-  }
-
-  .df-port.active {
-    background: var(--port-color);
-    border-color: var(--port-color);
-    box-shadow: 0 0 12px var(--port-color);
-  }
-
-  .df-port-label {
-    font-size: 0.75rem;
-    color: #86868b;
-    font-weight: 600;
-  }
-
-  /* SVG Cables */
-  .df-cables {
-    flex: 1;
-    min-width: 60px;
-    position: relative;
-  }
-
-  @media (max-width: 600px) {
-    .df-cables {
-      width: 100%;
-      height: 60px;
-      transform: rotate(90deg);
-      margin: 20px 0;
-    }
-  }
-
-  .cable-track {
+  .bp-wire {
     fill: none;
-    stroke: var(--color-border);
-    stroke-width: 4px;
-    stroke-dasharray: 8 8;
+    stroke-width: 0.5px;
   }
 
-  .cable-pulse {
+  .bp-wire-pulse {
     fill: none;
-    stroke-width: 6px;
+    stroke-width: 1px;
     stroke-linecap: round;
-    stroke-dasharray: 20 200;
-    animation: flowPulse 2s linear infinite;
+    stroke-dasharray: 10 50;
+    animation: wirePulse 2.5s linear infinite;
   }
 
-  @keyframes flowPulse {
-    0% { stroke-dashoffset: 220; }
-    100% { stroke-dashoffset: 0; }
+  @keyframes wirePulse {
+    from { stroke-dashoffset: 60; }
+    to { stroke-dashoffset: 0; }
   }
 
-  /* Zones */
-  .df-zones {
-    flex: 0 0 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 16px;
+  .blueprint-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 100%;
+    height: 100%;
+    position: relative;
     z-index: 2;
   }
 
-  @media (max-width: 600px) {
-    .df-zones {
-      flex: none;
-      width: 100%;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-  }
-
-  .df-room {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    border: 1px solid #e5e5ea;
-    height: 80px;
-  }
-
-  @media (max-width: 600px) {
-    .df-room {
-      flex: 1 1 calc(50% - 16px);
-      min-width: 140px;
-    }
-  }
-
-  .df-room-details {
+  .bp-room {
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    justify-content: space-between;
   }
 
-  .df-room-name {
+  @media (max-width: 500px) {
+    .bp-room {
+      padding: 16px;
+    }
+  }
+
+  .bp-room-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .bp-r-name {
     font-size: 1.125rem;
     font-weight: 700;
     color: var(--color-text-primary);
   }
 
-  .df-room-source {
+  .bp-r-source {
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--color-text-secondary);
+  }
+
+  .bp-r-icon {
+    color: var(--color-text-tertiary);
+    opacity: 0.5;
+  }
+
+  .bp-matrix {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140px;
+    height: 140px;
+    background: #1d1d1f;
+    border-radius: 20px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.2), inset 0 1px 1px rgba(255,255,255,0.1);
+  }
+
+  @media (max-width: 500px) {
+    .bp-matrix {
+      width: 100px;
+      height: 100px;
+      gap: 8px;
+      border-radius: 16px;
+    }
+  }
+
+  .m-logo {
+    color: #f5f5f7;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 500px) {
+    .m-logo {
+      font-size: 0.65rem;
+    }
+  }
+
+  .m-ports {
+    display: flex;
+    gap: 12px;
+  }
+
+  @media (max-width: 500px) {
+    .m-ports {
+      gap: 8px;
+    }
+  }
+
+  .m-port {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #333;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  @media (max-width: 500px) {
+    .m-port {
+      width: 8px;
+      height: 8px;
+    }
   }
 </style>
