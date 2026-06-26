@@ -4,7 +4,7 @@
 <div class="infographic-step">
   <div class="step-content fade-in-up">
     <h3>Hear what matters.</h3>
-    <p>When someone makes an announcement or the doorbell rings, the system automatically pauses the music so the message comes through clearly. Once it's finished, your music smoothly fades back in.</p>
+    <p>Music automatically pauses for announcements or doorbells, then smoothly fades back in when finished.</p>
   </div>
   
   <div class="step-visual fade-in-up">
@@ -89,7 +89,11 @@
 
   @media (max-width: 600px) {
     .override-board {
-      padding: 24px 16px;
+      margin: 0 -24px;
+      width: calc(100% + 48px);
+      max-width: none;
+      border-radius: 0;
+      padding: 32px 16px;
       gap: 24px;
     }
   }
