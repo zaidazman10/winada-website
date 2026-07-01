@@ -41,9 +41,10 @@ const {
         const canvas = document.getElementById('webgl-canvas');
         if (!canvas) return;
 
+        const isMobile = window.innerWidth < 768;
         const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 1.5));
 
         const scene = new THREE.Scene();
         // Orthographic camera for full screen 2D shader rendering
@@ -54,33 +55,28 @@ const {
           uniform float uTime;
           uniform vec2 uResolution;
 
-          // Hash function for noise
           float random(in vec2 st) {
               return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
           }
 
-          // 2D Noise
           float noise(in vec2 st) {
               vec2 i = floor(st);
               vec2 f = fract(st);
-
               float a = random(i);
               float b = random(i + vec2(1.0, 0.0));
               float c = random(i + vec2(0.0, 1.0));
               float d = random(i + vec2(1.0, 1.0));
-
               vec2 u = f * f * (3.0 - 2.0 * f);
               return mix(a, b, u.x) + (c - a)* u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
           }
 
-          // Fractal Brownian Motion
+          // Optimized fBM for mobile (3 loops instead of 5)
           float fbm(in vec2 st) {
               float value = 0.0;
               float amplitude = 0.5;
               vec2 shift = vec2(100.0);
-              // Rotate to create swirling effect
               mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
-              for (int i = 0; i < 5; ++i) {
+              for (int i = 0; i < 3; ++i) {
                   value += amplitude * noise(st);
                   st = rot * st * 2.0 + shift;
                   amplitude *= 0.5;
@@ -90,12 +86,10 @@ const {
 
           void main() {
               vec2 st = gl_FragCoord.xy / uResolution.xy;
-              // Fix aspect ratio
               st.x *= uResolution.x / uResolution.y;
 
               vec3 color = vec3(0.0);
 
-              // Fluid distortion layers
               vec2 q = vec2(0.);
               q.x = fbm( st + 0.00 * uTime);
               q.y = fbm( st + vec2(1.0));
@@ -106,22 +100,10 @@ const {
 
               float f = fbm(st + r);
 
-              // Dark fluid colors: Deep space background
-              color = mix(vec3(0.0, 0.0, 0.02),
-                          vec3(0.0, 0.1, 0.2),
-                          clamp((f*f)*4.0, 0.0, 1.0));
+              color = mix(vec3(0.0, 0.0, 0.02), vec3(0.0, 0.1, 0.2), clamp((f*f)*4.0, 0.0, 1.0));
+              color = mix(color, vec3(0.0, 0.7, 1.0), clamp(length(q), 0.0, 1.0));
+              color = mix(color, vec3(0.4, 0.0, 0.8), clamp(length(r.x), 0.0, 1.0));
 
-              // Swirling Neon Cyan and Blue
-              color = mix(color,
-                          vec3(0.0, 0.7, 1.0),
-                          clamp(length(q), 0.0, 1.0));
-
-              // Swirling Deep Violet / Magenta
-              color = mix(color,
-                          vec3(0.4, 0.0, 0.8),
-                          clamp(length(r.x), 0.0, 1.0));
-
-              // Soften the contrast and apply darkness
               gl_FragColor = vec4((f*f*f + 0.6*f*f + 0.5*f) * color, 1.0);
           }
         `;
@@ -149,7 +131,19 @@ const {
         const particleCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         particleCamera.position.z = 100;
 
-        const particleCount = 2000;
+        // Create soft circle texture for particles to prevent blocky/unrendered look
+        const canvasTexture = document.createElement('canvas');
+        canvasTexture.width = 32;
+        canvasTexture.height = 32;
+        const ctx = canvasTexture.getContext('2d');
+        const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+        gradient.addColorStop(0, 'rgba(0, 242, 254, 1)');
+        gradient.addColorStop(1, 'rgba(0, 242, 254, 0)');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 32, 32);
+        const circleTexture = new THREE.CanvasTexture(canvasTexture);
+
+        const particleCount = isMobile ? 500 : 1500;
         const posArray = new Float32Array(particleCount * 3);
         for(let i = 0; i < particleCount * 3; i++) {
           posArray[i] = (Math.random() - 0.5) * 500;
@@ -158,37 +152,38 @@ const {
         particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
         
         const particleMaterial = new THREE.PointsMaterial({
-          size: 1.5,
-          color: 0x00f2fe, // Neon cyan
+          size: 2.0,
+          map: circleTexture,
           transparent: true,
-          opacity: 0.5,
-          blending: THREE.AdditiveBlending
+          opacity: 0.6,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
         });
         
         const particlesMesh = new THREE.Points(particleGeometry, particleMaterial);
         particleScene.add(particlesMesh);
 
         // --- Lights for Glass ---
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
         particleScene.add(ambientLight);
         
-        const dirLight = new THREE.DirectionalLight(0x00f2fe, 3);
+        const dirLight = new THREE.DirectionalLight(0x00f2fe, 4);
         dirLight.position.set(50, 50, 50);
         particleScene.add(dirLight);
 
-        const dirLight2 = new THREE.DirectionalLight(0xfa709a, 2);
+        const dirLight2 = new THREE.DirectionalLight(0xfa709a, 3);
         dirLight2.position.set(-50, -50, 50);
         particleScene.add(dirLight2);
 
-        // --- Floating Crystal Geometry ---
+        // --- Floating Crystal Geometry (Solid, Flat Shaded to fix jagged wireframes) ---
         const glassMat = new THREE.MeshPhongMaterial({
-          color: 0x00f2fe,
-          emissive: 0x002255,
-          specular: 0xffffff,
+          color: 0x002255,
+          emissive: 0x001133,
+          specular: 0x00f2fe,
           shininess: 100,
           transparent: true,
-          opacity: 0.4,
-          wireframe: true
+          opacity: 0.8,
+          flatShading: true
         });
         
         const glassMesh1 = new THREE.Mesh(new THREE.IcosahedronGeometry(25, 0), glassMat);
@@ -202,10 +197,11 @@ const {
         // --- High-Speed Data Streams ---
         const streams = [];
         const streamGeo = new THREE.CylinderGeometry(0.8, 0.8, 100, 4);
-        streamGeo.rotateX(Math.PI / 2); // point them along Z axis
+        streamGeo.rotateX(Math.PI / 2);
         
-        for(let i = 0; i < 20; i++) {
-          // Mix of cyan and violet streams
+        // Less streams on mobile
+        const streamCount = isMobile ? 8 : 15;
+        for(let i = 0; i < streamCount; i++) {
           const streamMat = new THREE.MeshBasicMaterial({ 
             color: Math.random() > 0.5 ? 0x00f2fe : 0xfa709a, 
             transparent: true, 
@@ -217,7 +213,6 @@ const {
             (Math.random() - 0.5) * 300,
             (Math.random() - 0.5) * 300
           );
-          // Fast Z velocity
           stream.velocity = new THREE.Vector3(0, 0, Math.random() * 3 + 2);
           particleScene.add(stream);
           streams.push(stream);
@@ -237,34 +232,27 @@ const {
           requestAnimationFrame(animate);
           material.uniforms.uTime.value = clock.getElapsedTime();
           
-          // Render Background Liquid Shader
           renderer.autoClear = true;
           renderer.render(scene, camera);
 
-          // Fix Depth Occlusion: Clear depth buffer so the 2D background quad doesn't hide 3D objects
           renderer.clearDepth();
 
-          // Render 3D Foreground Particles
           renderer.autoClear = false;
           
-          // Slowly rotate entire particle field
           particlesMesh.rotation.y += 0.001;
           particlesMesh.rotation.x += 0.0005;
 
-          // Animate Glass Geometry
           glassMesh1.rotation.x += 0.002;
           glassMesh1.rotation.y += 0.003;
           glassMesh2.rotation.x -= 0.003;
           glassMesh2.rotation.z -= 0.002;
-          // Gentle floating motion
+          
           glassMesh1.position.y += Math.sin(material.uniforms.uTime.value) * 0.02;
           glassMesh2.position.y += Math.cos(material.uniforms.uTime.value) * 0.02;
 
-          // Animate Data Streams
           for(let i = 0; i < streams.length; i++) {
             const stream = streams[i];
             stream.position.add(stream.velocity);
-            // Reset if they fly past the camera
             if (stream.position.z > 150) {
               stream.position.z = -200;
               stream.position.x = (Math.random() - 0.5) * 300;
@@ -272,7 +260,6 @@ const {
             }
           }
           
-          // Smooth camera parallax based on mouse
           particleCamera.position.x += (mouseX - particleCamera.position.x) * 0.05;
           particleCamera.position.y += (-mouseY - particleCamera.position.y) * 0.05;
           particleCamera.lookAt(particleScene.position);
@@ -283,6 +270,8 @@ const {
         animate();
 
         window.addEventListener('resize', () => {
+          const mobile = window.innerWidth < 768;
+          renderer.setPixelRatio(mobile ? 1 : Math.min(window.devicePixelRatio, 1.5));
           renderer.setSize(window.innerWidth, window.innerHeight);
           material.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
           
