@@ -143,10 +143,17 @@ const {
         ctx.fillRect(0, 0, 32, 32);
         const circleTexture = new THREE.CanvasTexture(canvasTexture);
 
-        const particleCount = isMobile ? 500 : 1500;
+        const particleCount = isMobile ? 800 : 2500;
         const posArray = new Float32Array(particleCount * 3);
-        for(let i = 0; i < particleCount * 3; i++) {
-          posArray[i] = (Math.random() - 0.5) * 500;
+        for(let i = 0; i < particleCount; i++) {
+          // Generate particles in a massive, elegant ring (audio halo)
+          const radius = 120 + (Math.random() * 60);
+          const theta = Math.random() * Math.PI * 2;
+          const y = (Math.random() - 0.5) * 30; // thickness of the ring
+          
+          posArray[i*3] = Math.cos(theta) * radius;
+          posArray[i*3+1] = y;
+          posArray[i*3+2] = Math.sin(theta) * radius;
         }
         const particleGeometry = new THREE.BufferGeometry();
         particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
@@ -155,68 +162,16 @@ const {
           size: 2.0,
           map: circleTexture,
           transparent: true,
-          opacity: 0.6,
+          opacity: 0.8,
           blending: THREE.AdditiveBlending,
-          depthWrite: false
+          depthWrite: false,
+          color: 0x00f2fe
         });
         
         const particlesMesh = new THREE.Points(particleGeometry, particleMaterial);
+        // Tilt the ring slightly so it looks dynamic
+        particlesMesh.rotation.x = -0.4;
         particleScene.add(particlesMesh);
-
-        // --- Lights for Glass ---
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-        particleScene.add(ambientLight);
-        
-        const dirLight = new THREE.DirectionalLight(0x00f2fe, 4);
-        dirLight.position.set(50, 50, 50);
-        particleScene.add(dirLight);
-
-        const dirLight2 = new THREE.DirectionalLight(0xfa709a, 3);
-        dirLight2.position.set(-50, -50, 50);
-        particleScene.add(dirLight2);
-
-        // --- Floating Crystal Geometry (Solid, Flat Shaded to fix jagged wireframes) ---
-        const glassMat = new THREE.MeshPhongMaterial({
-          color: 0x002255,
-          emissive: 0x001133,
-          specular: 0x00f2fe,
-          shininess: 100,
-          transparent: true,
-          opacity: 0.8,
-          flatShading: true
-        });
-        
-        const glassMesh1 = new THREE.Mesh(new THREE.IcosahedronGeometry(25, 0), glassMat);
-        glassMesh1.position.set(-45, 20, 10);
-        particleScene.add(glassMesh1);
-
-        const glassMesh2 = new THREE.Mesh(new THREE.OctahedronGeometry(20, 0), glassMat);
-        glassMesh2.position.set(50, -20, 0);
-        particleScene.add(glassMesh2);
-
-        // --- High-Speed Data Streams ---
-        const streams = [];
-        const streamGeo = new THREE.CylinderGeometry(0.8, 0.8, 100, 4);
-        streamGeo.rotateX(Math.PI / 2);
-        
-        // Less streams on mobile
-        const streamCount = isMobile ? 8 : 15;
-        for(let i = 0; i < streamCount; i++) {
-          const streamMat = new THREE.MeshBasicMaterial({ 
-            color: Math.random() > 0.5 ? 0x00f2fe : 0xfa709a, 
-            transparent: true, 
-            opacity: 0.6 
-          });
-          const stream = new THREE.Mesh(streamGeo, streamMat);
-          stream.position.set(
-            (Math.random() - 0.5) * 300,
-            (Math.random() - 0.5) * 300,
-            (Math.random() - 0.5) * 300
-          );
-          stream.velocity = new THREE.Vector3(0, 0, Math.random() * 3 + 2);
-          particleScene.add(stream);
-          streams.push(stream);
-        }
 
         // Mouse Parallax Interaction
         let mouseX = 0;
@@ -239,26 +194,8 @@ const {
 
           renderer.autoClear = false;
           
-          particlesMesh.rotation.y += 0.001;
-          particlesMesh.rotation.x += 0.0005;
-
-          glassMesh1.rotation.x += 0.002;
-          glassMesh1.rotation.y += 0.003;
-          glassMesh2.rotation.x -= 0.003;
-          glassMesh2.rotation.z -= 0.002;
-          
-          glassMesh1.position.y += Math.sin(material.uniforms.uTime.value) * 0.02;
-          glassMesh2.position.y += Math.cos(material.uniforms.uTime.value) * 0.02;
-
-          for(let i = 0; i < streams.length; i++) {
-            const stream = streams[i];
-            stream.position.add(stream.velocity);
-            if (stream.position.z > 150) {
-              stream.position.z = -200;
-              stream.position.x = (Math.random() - 0.5) * 300;
-              stream.position.y = (Math.random() - 0.5) * 300;
-            }
-          }
+          // Slowly rotate the massive audio ring
+          particlesMesh.rotation.y += 0.002;
           
           particleCamera.position.x += (mouseX - particleCamera.position.x) * 0.05;
           particleCamera.position.y += (-mouseY - particleCamera.position.y) * 0.05;
