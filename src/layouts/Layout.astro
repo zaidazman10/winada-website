@@ -26,11 +26,14 @@ const {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <title>{title}</title>
   </head>
-  <body>
-    <!-- 3D WebGL Background -->
-    <canvas id="webgl-canvas"></canvas>
-
-    <div class="app-wrapper">
+  <body class="bg-black text-white selection:bg-cyan-500 selection:text-black">
+    <!-- WebGL Background -->
+    <canvas id="webgl-canvas" class="fixed inset-0 w-full h-full -z-20"></canvas>
+    
+    <!-- Protective Dark Overlay for Text Legibility -->
+    <div class="fixed inset-0 w-full h-full bg-gradient-to-b from-black/80 via-black/40 to-black/90 pointer-events-none -z-10"></div>
+    
+    <div class="relative z-10 w-full min-h-screen">
       <slot />
     </div>
 
