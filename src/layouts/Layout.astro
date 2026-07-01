@@ -179,29 +179,28 @@ const {
         dirLight2.position.set(-50, -50, 50);
         particleScene.add(dirLight2);
 
-        // --- Floating Glass Geometry ---
-        const glassMat = new THREE.MeshPhysicalMaterial({
-          color: 0xffffff,
-          transmission: 0.9,
-          opacity: 1,
-          metalness: 0.1,
-          roughness: 0.1,
-          ior: 1.5,
-          thickness: 5.0,
-          transparent: true
+        // --- Floating Crystal Geometry ---
+        const glassMat = new THREE.MeshPhongMaterial({
+          color: 0x00f2fe,
+          emissive: 0x002255,
+          specular: 0xffffff,
+          shininess: 100,
+          transparent: true,
+          opacity: 0.4,
+          wireframe: true
         });
         
-        const glassMesh1 = new THREE.Mesh(new THREE.IcosahedronGeometry(12, 0), glassMat);
-        glassMesh1.position.set(-35, 15, 20);
+        const glassMesh1 = new THREE.Mesh(new THREE.IcosahedronGeometry(25, 0), glassMat);
+        glassMesh1.position.set(-45, 20, 10);
         particleScene.add(glassMesh1);
 
-        const glassMesh2 = new THREE.Mesh(new THREE.OctahedronGeometry(8, 0), glassMat);
-        glassMesh2.position.set(40, -15, 10);
+        const glassMesh2 = new THREE.Mesh(new THREE.OctahedronGeometry(20, 0), glassMat);
+        glassMesh2.position.set(50, -20, 0);
         particleScene.add(glassMesh2);
 
         // --- High-Speed Data Streams ---
         const streams = [];
-        const streamGeo = new THREE.CylinderGeometry(0.1, 0.1, 40, 4);
+        const streamGeo = new THREE.CylinderGeometry(0.8, 0.8, 100, 4);
         streamGeo.rotateX(Math.PI / 2); // point them along Z axis
         
         for(let i = 0; i < 20; i++) {
