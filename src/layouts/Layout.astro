@@ -137,7 +137,8 @@ const {
             }
           `,
           fragmentShader: fragmentShader,
-          transparent: true
+          transparent: true,
+          depthWrite: false
         });
 
         const mesh = new THREE.Mesh(geometry, material);
@@ -239,6 +240,9 @@ const {
           // Render Background Liquid Shader
           renderer.autoClear = true;
           renderer.render(scene, camera);
+
+          // Fix Depth Occlusion: Clear depth buffer so the 2D background quad doesn't hide 3D objects
+          renderer.clearDepth();
 
           // Render 3D Foreground Particles
           renderer.autoClear = false;
