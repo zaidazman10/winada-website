@@ -143,16 +143,17 @@ const {
         ctx.fillRect(0, 0, 32, 32);
         const circleTexture = new THREE.CanvasTexture(canvasTexture);
 
-        // --- Morphing Audio Core (Living Sphere) ---
-        // Detail 25 = ~6000 particles, Detail 15 = ~2500
-        const detailLevel = isMobile ? 15 : 25; 
-        const particleGeometry = new THREE.IcosahedronGeometry(90, detailLevel);
+        // --- Infinite Silk Knot (Aesthetic Parametric Shape) ---
+        const tubeSegments = isMobile ? 250 : 500;
+        const radialSegments = isMobile ? 30 : 60;
+        // Radius: 60, Tube Radius: 20
+        const particleGeometry = new THREE.TorusKnotGeometry(60, 20, tubeSegments, radialSegments, 2, 3);
         
         // Add random sizes for particles
         const vertexCount = particleGeometry.attributes.position.count;
         const sizeArray = new Float32Array(vertexCount);
         for(let i = 0; i < vertexCount; i++) {
-            sizeArray[i] = Math.random() * 2.5 + 1.5; // Random sizes 1.5 - 4.0
+            sizeArray[i] = Math.random() * 2.0 + 1.0; // Random sizes 1.0 - 3.0
         }
         particleGeometry.setAttribute('aSize', new THREE.BufferAttribute(sizeArray, 1));
 
@@ -225,11 +226,11 @@ const {
           }
 
           void main() {
-            // Morph the sphere organically
-            float noiseVal = snoise(position * 0.015 + uTime * 0.4);
+            // Soft breathing motion instead of aggressive morphing
+            float noiseVal = snoise(position * 0.015 + uTime * 0.3);
             
-            // Displace outwards along normal vector
-            vec3 newPosition = position + normal * (noiseVal * 40.0);
+            // Displace gently outwards
+            vec3 newPosition = position + normal * (noiseVal * 12.0);
             vPosition = newPosition;
 
             vec4 mvPosition = modelViewMatrix * vec4(newPosition, 1.0);
@@ -241,12 +242,17 @@ const {
 
         const coreFragmentShader = `
           uniform sampler2D pointTexture;
+          uniform float uTime;
           varying vec3 vPosition;
 
           void main() {
-            // Tint based on depth (Y position) to make the core look volumetric
-            float depthMix = smoothstep(-100.0, 100.0, vPosition.y);
-            vec3 color = mix(vec3(0.4, 0.0, 0.8), vec3(0.0, 0.95, 1.0), depthMix);
+            // Elegant sweeping gradient across the geometry
+            float sweep = sin(vPosition.x * 0.02 + vPosition.y * 0.02 + uTime * 0.4) * 0.5 + 0.5;
+            vec3 color = mix(vec3(0.0, 0.7, 1.0), vec3(0.6, 0.0, 1.0), sweep); // Cyan to Violet
+
+            // Brighten points that are closer to the camera
+            float depthMix = smoothstep(-60.0, 60.0, vPosition.z);
+            color += vec3(0.1, 0.2, 0.2) * depthMix;
 
             gl_FragColor = vec4(color, 1.0) * texture2D(pointTexture, gl_PointCoord);
           }
