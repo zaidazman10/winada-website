@@ -30,8 +30,8 @@ const {
     <!-- WebGL Background -->
     <canvas id="webgl-canvas" class="fixed inset-0 w-full h-full -z-20"></canvas>
     
-    <!-- Protective Dark Overlay for Text Legibility -->
-    <div class="fixed inset-0 w-full h-full bg-gradient-to-b from-black/80 via-black/40 to-black/90 pointer-events-none -z-10"></div>
+    <!-- Protective Soft Overlay (No harsh black vignette) -->
+    <div class="fixed inset-0 w-full h-full bg-black/30 pointer-events-none -z-10"></div>
     
     <div class="relative z-10 w-full min-h-screen">
       <slot />
@@ -103,10 +103,10 @@ const {
 
               float f = fbm(st + r);
 
-              // Minimalist UI/UX Palette: Deep Midnight Blue to subtle Indigo
-              color = mix(vec3(0.0, 0.0, 0.02), vec3(0.0, 0.02, 0.06), clamp((f*f)*4.0, 0.0, 1.0));
-              color = mix(color, vec3(0.0, 0.1, 0.2), clamp(length(q), 0.0, 1.0)); 
-              color = mix(color, vec3(0.05, 0.0, 0.15), clamp(length(r.x), 0.0, 1.0)); 
+              // Elegant Aurora Palette: Soft Dark Blue, Vibrant Teal, and Soft Purple (Not pitch black!)
+              color = mix(vec3(0.05, 0.1, 0.25), vec3(0.1, 0.2, 0.4), clamp((f*f)*4.0, 0.0, 1.0));
+              color = mix(color, vec3(0.0, 0.8, 0.8), clamp(length(q), 0.0, 1.0)); // Teal
+              color = mix(color, vec3(0.6, 0.2, 0.8), clamp(length(r.x), 0.0, 1.0)); // Soft Purple
 
               gl_FragColor = vec4((f*f*f + 0.6*f*f + 0.5*f) * color, 1.0);
           }
@@ -189,18 +189,21 @@ const {
           varying vec3 vPosition;
 
           void main() {
-            // UI/UX Color Palette: Sleek Cyan and Indigo
-            vec3 cyan = vec3(0.0, 0.8, 1.0);
-            vec3 indigo = vec3(0.3, 0.0, 1.0);
+            // Elegant Aurora Colors for the Soundwave
+            vec3 teal = vec3(0.0, 1.0, 0.8);
+            vec3 pink = vec3(1.0, 0.4, 0.8);
             
-            // Blend based on the wave height (Y position) to make peaks cyan and troughs indigo
+            // Blend based on the wave height
             float waveHeight = smoothstep(-15.0, 15.0, vPosition.y);
-            vec3 color = mix(indigo, cyan, waveHeight);
+            vec3 color = mix(teal, pink, waveHeight);
 
-            // Fade out the particles deeply in the Z-distance so it blends into the background seamlessly
+            // Add a soft white glow so it looks beautiful and magical
+            color += vec3(0.2);
+
+            // Fade out seamlessly
             float distanceFade = smoothstep(150.0, -100.0, vPosition.z);
             
-            gl_FragColor = vec4(color, distanceFade * 0.8) * texture2D(pointTexture, gl_PointCoord);
+            gl_FragColor = vec4(color, distanceFade * 0.9) * texture2D(pointTexture, gl_PointCoord);
           }
         `;
 
