@@ -167,6 +167,62 @@ const {
         const particlesMesh = new THREE.Points(particleGeometry, particleMaterial);
         particleScene.add(particlesMesh);
 
+        // --- Lights for Glass ---
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        particleScene.add(ambientLight);
+        
+        const dirLight = new THREE.DirectionalLight(0x00f2fe, 3);
+        dirLight.position.set(50, 50, 50);
+        particleScene.add(dirLight);
+
+        const dirLight2 = new THREE.DirectionalLight(0xfa709a, 2);
+        dirLight2.position.set(-50, -50, 50);
+        particleScene.add(dirLight2);
+
+        // --- Floating Glass Geometry ---
+        const glassMat = new THREE.MeshPhysicalMaterial({
+          color: 0xffffff,
+          transmission: 0.9,
+          opacity: 1,
+          metalness: 0.1,
+          roughness: 0.1,
+          ior: 1.5,
+          thickness: 5.0,
+          transparent: true
+        });
+        
+        const glassMesh1 = new THREE.Mesh(new THREE.IcosahedronGeometry(12, 0), glassMat);
+        glassMesh1.position.set(-35, 15, 20);
+        particleScene.add(glassMesh1);
+
+        const glassMesh2 = new THREE.Mesh(new THREE.OctahedronGeometry(8, 0), glassMat);
+        glassMesh2.position.set(40, -15, 10);
+        particleScene.add(glassMesh2);
+
+        // --- High-Speed Data Streams ---
+        const streams = [];
+        const streamGeo = new THREE.CylinderGeometry(0.1, 0.1, 40, 4);
+        streamGeo.rotateX(Math.PI / 2); // point them along Z axis
+        
+        for(let i = 0; i < 20; i++) {
+          // Mix of cyan and violet streams
+          const streamMat = new THREE.MeshBasicMaterial({ 
+            color: Math.random() > 0.5 ? 0x00f2fe : 0xfa709a, 
+            transparent: true, 
+            opacity: 0.6 
+          });
+          const stream = new THREE.Mesh(streamGeo, streamMat);
+          stream.position.set(
+            (Math.random() - 0.5) * 300,
+            (Math.random() - 0.5) * 300,
+            (Math.random() - 0.5) * 300
+          );
+          // Fast Z velocity
+          stream.velocity = new THREE.Vector3(0, 0, Math.random() * 3 + 2);
+          particleScene.add(stream);
+          streams.push(stream);
+        }
+
         // Mouse Parallax Interaction
         let mouseX = 0;
         let mouseY = 0;
@@ -191,6 +247,27 @@ const {
           // Slowly rotate entire particle field
           particlesMesh.rotation.y += 0.001;
           particlesMesh.rotation.x += 0.0005;
+
+          // Animate Glass Geometry
+          glassMesh1.rotation.x += 0.002;
+          glassMesh1.rotation.y += 0.003;
+          glassMesh2.rotation.x -= 0.003;
+          glassMesh2.rotation.z -= 0.002;
+          // Gentle floating motion
+          glassMesh1.position.y += Math.sin(material.uniforms.uTime.value) * 0.02;
+          glassMesh2.position.y += Math.cos(material.uniforms.uTime.value) * 0.02;
+
+          // Animate Data Streams
+          for(let i = 0; i < streams.length; i++) {
+            const stream = streams[i];
+            stream.position.add(stream.velocity);
+            // Reset if they fly past the camera
+            if (stream.position.z > 150) {
+              stream.position.z = -200;
+              stream.position.x = (Math.random() - 0.5) * 300;
+              stream.position.y = (Math.random() - 0.5) * 300;
+            }
+          }
           
           // Smooth camera parallax based on mouse
           particleCamera.position.x += (mouseX - particleCamera.position.x) * 0.05;
