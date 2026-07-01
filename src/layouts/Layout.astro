@@ -22,20 +22,91 @@ const {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Using Inter to mimic San Francisco -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Three.js for 3D Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <title>{title}</title>
   </head>
   <body>
-    <!-- Animated Aurora Background -->
-    <div class="aurora-bg">
-      <div class="aurora-blob aurora-1"></div>
-      <div class="aurora-blob aurora-2"></div>
-      <div class="aurora-blob aurora-3"></div>
-      <div class="aurora-blob aurora-4"></div>
-    </div>
+    <!-- 3D WebGL Background -->
+    <canvas id="webgl-canvas"></canvas>
 
     <div class="app-wrapper">
       <slot />
     </div>
+
+    <script is:inline>
+      window.addEventListener('DOMContentLoaded', () => {
+        if (typeof THREE === 'undefined') return;
+
+        const canvas = document.getElementById('webgl-canvas');
+        if (!canvas) return;
+
+        const scene = new THREE.Scene();
+        // Add deep black fog so the matrix grid fades perfectly into the distance
+        scene.fog = new THREE.FogExp2(0x000000, 0.003);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        // Position camera to look across the grid terrain
+        camera.position.y = 8;
+        camera.position.z = 20;
+        camera.rotation.x = -0.2;
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Create the massive audio wave terrain
+        const geometry = new THREE.PlaneGeometry(200, 200, 60, 60);
+
+        const material = new THREE.MeshBasicMaterial({ 
+          color: 0x00f2fe, // Neon cyan
+          wireframe: true,
+          transparent: true,
+          opacity: 0.15
+        });
+
+        const plane = new THREE.Mesh(geometry, material);
+        plane.rotation.x = -Math.PI / 2;
+        plane.position.y = -5;
+        scene.add(plane);
+
+        const clock = new THREE.Clock();
+        const positions = geometry.attributes.position;
+        const count = positions.count;
+
+        function animate() {
+          requestAnimationFrame(animate);
+          
+          const elapsedTime = clock.getElapsedTime();
+
+          // Animate vertices to create rolling audio frequencies
+          for(let i = 0; i < count; i++) {
+            const x = positions.getX(i);
+            const y = positions.getY(i);
+            // Complex wave interference math
+            const z = Math.sin(x * 0.1 + elapsedTime * 0.6) * 1.5 + 
+                      Math.cos(y * 0.1 + elapsedTime * 0.4) * 1.5 +
+                      Math.sin((x + y) * 0.05 - elapsedTime * 0.3) * 1;
+            positions.setZ(i, z);
+          }
+          positions.needsUpdate = true;
+
+          // Infinite flying effect
+          plane.position.z = (elapsedTime * 8) % (200 / 60); // Reset position based on grid size
+
+          renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Responsive handling
+        window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+      });
+    </script>
   </body>
 </html>
 
@@ -98,63 +169,16 @@ const {
     min-height: 100vh;
   }
 
-  /* Aurora Background System */
-  .aurora-bg {
+  /* WebGL Background System */
+  #webgl-canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     z-index: 0;
-    overflow: hidden;
-    background: #030305;
-  }
-
-  .aurora-blob {
-    position: absolute;
-    filter: blur(80px);
-    opacity: 0.6;
-    border-radius: 50%;
-    animation: floatAurora 20s infinite alternate ease-in-out;
-  }
-
-  .aurora-1 {
-    top: -10%; left: -10%;
-    width: 50vw; height: 50vw;
-    background: #4facfe;
-    animation-delay: 0s;
-  }
-  .aurora-2 {
-    bottom: -20%; right: -10%;
-    width: 60vw; height: 60vw;
-    background: #43e97b;
-    animation-delay: -5s;
-    animation-duration: 25s;
-  }
-  .aurora-3 {
-    top: 40%; left: 30%;
-    width: 40vw; height: 40vw;
-    background: #fa709a;
-    animation-delay: -10s;
-    animation-duration: 30s;
-  }
-  .aurora-4 {
-    top: -20%; right: 20%;
-    width: 45vw; height: 45vw;
-    background: #a18cd1;
-    animation-delay: -15s;
-    animation-duration: 22s;
-  }
-
-  @keyframes floatAurora {
-    0% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(10vw, -10vh) scale(1.1); }
-    66% { transform: translate(-10vw, 15vh) scale(0.9); }
-    100% { transform: translate(5vw, 5vh) scale(1); }
-  }
-
-  @media (max-width: 600px) {
-    .aurora-blob { filter: blur(50px); opacity: 0.5; }
+    background: #000000;
+    pointer-events: none;
   }
 
   .app-wrapper {
