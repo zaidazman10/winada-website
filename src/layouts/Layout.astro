@@ -143,12 +143,61 @@ const {
         const mesh = new THREE.Mesh(geometry, material);
         scene.add(mesh);
 
+        // --- 3D Particle System ---
+        const particleScene = new THREE.Scene();
+        const particleCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        particleCamera.position.z = 100;
+
+        const particleCount = 2000;
+        const posArray = new Float32Array(particleCount * 3);
+        for(let i = 0; i < particleCount * 3; i++) {
+          posArray[i] = (Math.random() - 0.5) * 500;
+        }
+        const particleGeometry = new THREE.BufferGeometry();
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        
+        const particleMaterial = new THREE.PointsMaterial({
+          size: 1.5,
+          color: 0x00f2fe, // Neon cyan
+          transparent: true,
+          opacity: 0.5,
+          blending: THREE.AdditiveBlending
+        });
+        
+        const particlesMesh = new THREE.Points(particleGeometry, particleMaterial);
+        particleScene.add(particlesMesh);
+
+        // Mouse Parallax Interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        window.addEventListener('mousemove', (event) => {
+          mouseX = (event.clientX - window.innerWidth / 2) * 0.05;
+          mouseY = (event.clientY - window.innerHeight / 2) * 0.05;
+        });
+
         const clock = new THREE.Clock();
 
         function animate() {
           requestAnimationFrame(animate);
           material.uniforms.uTime.value = clock.getElapsedTime();
+          
+          // Render Background Liquid Shader
+          renderer.autoClear = true;
           renderer.render(scene, camera);
+
+          // Render 3D Foreground Particles
+          renderer.autoClear = false;
+          
+          // Slowly rotate entire particle field
+          particlesMesh.rotation.y += 0.001;
+          particlesMesh.rotation.x += 0.0005;
+          
+          // Smooth camera parallax based on mouse
+          particleCamera.position.x += (mouseX - particleCamera.position.x) * 0.05;
+          particleCamera.position.y += (-mouseY - particleCamera.position.y) * 0.05;
+          particleCamera.lookAt(particleScene.position);
+          
+          renderer.render(particleScene, particleCamera);
         }
 
         animate();
@@ -156,6 +205,9 @@ const {
         window.addEventListener('resize', () => {
           renderer.setSize(window.innerWidth, window.innerHeight);
           material.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+          
+          particleCamera.aspect = window.innerWidth / window.innerHeight;
+          particleCamera.updateProjectionMatrix();
         });
       });
     </script>
