@@ -163,6 +163,7 @@ const {
         particleGeometry.setAttribute('aSize', new THREE.BufferAttribute(sizeArray, 1));
 
         const coreVertexShader = `
+          uniform float uTime;
           attribute float aSize;
           varying vec3 vPosition;
 
