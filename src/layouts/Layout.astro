@@ -100,9 +100,9 @@ const {
 
               float f = fbm(st + r);
 
-              color = mix(vec3(0.0, 0.0, 0.02), vec3(0.0, 0.1, 0.2), clamp((f*f)*4.0, 0.0, 1.0));
-              color = mix(color, vec3(0.0, 0.7, 1.0), clamp(length(q), 0.0, 1.0));
-              color = mix(color, vec3(0.4, 0.0, 0.8), clamp(length(r.x), 0.0, 1.0));
+              color = mix(vec3(0.0, 0.0, 0.02), vec3(0.0, 0.05, 0.1), clamp((f*f)*4.0, 0.0, 1.0));
+              color = mix(color, vec3(0.0, 0.3, 0.6), clamp(length(q), 0.0, 1.0)); // Darker elegant blue
+              color = mix(color, vec3(0.2, 0.0, 0.4), clamp(length(r.x), 0.0, 1.0)); // Deep velvet violet
 
               gl_FragColor = vec4((f*f*f + 0.6*f*f + 0.5*f) * color, 1.0);
           }
@@ -183,15 +183,16 @@ const {
           }
 
           void main() {
-            // Create a shifting hue (RGB spectrum) based on 3D coordinates and time
-            float hue = fract(vPosition.x * 0.005 + vPosition.y * 0.005 + vPosition.z * 0.002 + uTime * 0.2);
+            // High contrast aesthetic: Warm Sunset (Pink/Coral/Gold) against the dark blue background
+            // Hue shifts smoothly between ~0.95 (Pink) and ~1.15 (Gold)
+            float hue = 0.95 + sin(vPosition.x * 0.02 + vPosition.y * 0.02 + uTime * 0.5) * 0.15;
             
-            // Convert to vivid RGB colors
-            vec3 color = hsl2rgb(vec3(hue, 1.0, 0.6));
+            // Bright, vivid colors
+            vec3 color = hsl2rgb(vec3(hue, 1.0, 0.75));
 
-            // Brighten points that are closer to the camera for 3D depth
-            float depthMix = smoothstep(-60.0, 60.0, vPosition.z);
-            color += vec3(0.15) * depthMix;
+            // Intense white/silver glow for points closest to the camera to create massive 3D depth
+            float depthMix = smoothstep(-40.0, 60.0, vPosition.z);
+            color += vec3(0.4) * depthMix;
 
             gl_FragColor = vec4(color, 1.0) * texture2D(pointTexture, gl_PointCoord);
           }
