@@ -42,11 +42,10 @@ const {
         if (!canvas) return;
 
         const scene = new THREE.Scene();
-        // Add deep black fog so the matrix grid fades perfectly into the distance
+        // Fog to blend smoothly into the dark background
         scene.fog = new THREE.FogExp2(0x000000, 0.003);
 
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        // Position camera to look across the grid terrain
         camera.position.y = 8;
         camera.position.z = 20;
         camera.rotation.x = -0.2;
@@ -55,14 +54,36 @@ const {
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Create the massive audio wave terrain
+        // Create the terrain grid
         const geometry = new THREE.PlaneGeometry(200, 200, 60, 60);
 
-        const material = new THREE.MeshBasicMaterial({ 
-          color: 0x00f2fe, // Neon cyan
+        // Move the complex math to the GPU via ShaderMaterial for perfect 60fps performance
+        const material = new THREE.ShaderMaterial({
+          uniforms: {
+            uTime: { value: 0 }
+          },
+          vertexShader: `
+            uniform float uTime;
+            void main() {
+              vec3 pos = position;
+              // Add a flying effect directly into the time coordinate to avoid snapping
+              float flyingY = pos.y + (uTime * 15.0);
+              
+              pos.z = sin(pos.x * 0.1 + uTime * 0.6) * 1.5 + 
+                      cos(flyingY * 0.1 + uTime * 0.4) * 1.5 +
+                      sin((pos.x + flyingY) * 0.05 - uTime * 0.3) * 1.0;
+                      
+              gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+            }
+          `,
+          fragmentShader: `
+            void main() {
+              // Neon cyan color with slight transparency
+              gl_FragColor = vec4(0.0, 0.95, 1.0, 0.25);
+            }
+          `,
           wireframe: true,
-          transparent: true,
-          opacity: 0.15
+          transparent: true
         });
 
         const plane = new THREE.Mesh(geometry, material);
@@ -71,28 +92,12 @@ const {
         scene.add(plane);
 
         const clock = new THREE.Clock();
-        const positions = geometry.attributes.position;
-        const count = positions.count;
 
         function animate() {
           requestAnimationFrame(animate);
           
-          const elapsedTime = clock.getElapsedTime();
-
-          // Animate vertices to create rolling audio frequencies
-          for(let i = 0; i < count; i++) {
-            const x = positions.getX(i);
-            const y = positions.getY(i);
-            // Complex wave interference math
-            const z = Math.sin(x * 0.1 + elapsedTime * 0.6) * 1.5 + 
-                      Math.cos(y * 0.1 + elapsedTime * 0.4) * 1.5 +
-                      Math.sin((x + y) * 0.05 - elapsedTime * 0.3) * 1;
-            positions.setZ(i, z);
-          }
-          positions.needsUpdate = true;
-
-          // Infinite flying effect
-          plane.position.z = (elapsedTime * 8) % (200 / 60); // Reset position based on grid size
+          // Only update the time uniform. Zero CPU math = zero lag.
+          material.uniforms.uTime.value = clock.getElapsedTime();
 
           renderer.render(scene, camera);
         }
