@@ -245,14 +245,22 @@ const {
           uniform float uTime;
           varying vec3 vPosition;
 
-          void main() {
-            // Elegant sweeping gradient across the geometry
-            float sweep = sin(vPosition.x * 0.02 + vPosition.y * 0.02 + uTime * 0.4) * 0.5 + 0.5;
-            vec3 color = mix(vec3(0.0, 0.7, 1.0), vec3(0.6, 0.0, 1.0), sweep); // Cyan to Violet
+          // Helper function to convert HSL to RGB
+          vec3 hsl2rgb(vec3 c) {
+              vec3 rgb = clamp(abs(mod(c.x * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
+              return c.z + c.y * (rgb - 0.5) * (1.0 - abs(2.0 * c.z - 1.0));
+          }
 
-            // Brighten points that are closer to the camera
+          void main() {
+            // Create a shifting hue (RGB spectrum) based on 3D coordinates and time
+            float hue = fract(vPosition.x * 0.005 + vPosition.y * 0.005 + vPosition.z * 0.002 + uTime * 0.2);
+            
+            // Convert to vivid RGB colors
+            vec3 color = hsl2rgb(vec3(hue, 1.0, 0.6));
+
+            // Brighten points that are closer to the camera for 3D depth
             float depthMix = smoothstep(-60.0, 60.0, vPosition.z);
-            color += vec3(0.1, 0.2, 0.2) * depthMix;
+            color += vec3(0.15) * depthMix;
 
             gl_FragColor = vec4(color, 1.0) * texture2D(pointTexture, gl_PointCoord);
           }
